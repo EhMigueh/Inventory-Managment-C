@@ -16,10 +16,10 @@ En este conjunto de directorios está desarrollado el análisis de rendimiento d
 - [Ignacio Contreras](https://github.com/Dysnomia9)
 - **igcontre@umag.cl**
 
-### 3. Rodolfo 🤓
+### 3. Rodolfo Cifuentes 🤓
 - Estudiante de Ingeniería Informática
-- [Rodolfo ](https://github.com/)
-- **@umag.cl**
+- [Rodolfo Cifuentes](https://github.com/Fitooooooooo)
+- **rcifuent@umag.cl**
 
 ---
 
