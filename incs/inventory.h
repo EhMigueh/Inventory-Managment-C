@@ -22,3 +22,5 @@ Inventory* create_inventory(int capacity);
 void free_inventory(Inventory *inventory);
 int load_inventory_from_file(Inventory *inventory, const char *filename);
 int save_inventory_to_file(Inventory *inventory, const char *filename);
+void print_inventory_sample(Inventory *inventory, int sample_size);
+void print_product(Product *product);
