@@ -1,26 +1,5 @@
 #include "db.h"
-
-void generate_csv(const char *, int);
-void generate_unique_data(char data[][MAX_NAME_LENGTH], int);
-void generate_unique_string(char *, int);
-int is_duplicate(char array[][MAX_NAME_LENGTH], int size, char *value);
-double random_price(double min, double max);
-int random_stock(int min, int max);
-
-int main(void)
-{
-    srand((unsigned int)time(NULL));
-
-    fprintf(stdout, "\nBienvenido a la creación ALEATORIA de BASE DE DATOS.\n");
-    fprintf(stdout, "CREADO Bases de Datos...\n");
-
-    generate_csv("small_database.csv", SMALL_DB_SIZE);
-    generate_csv("large_database.csv", LARGE_DB_SIZE);
-
-    fprintf(stdout, "\nBases de Datos creadas con ÉXITO.\n\n");
-
-    return EXIT_SUCCESS;
-}
+#include "createdb.h"
 
 void generate_csv(const char *filename, int size)
 {
