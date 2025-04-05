@@ -26,6 +26,7 @@ int main(void)
      }
      printf("Se cargaron %d productos\n", loaded);
      
+ 
      // Mostrar muestra de los datos originales
      print_inventory_sample(inventory, 5);
 

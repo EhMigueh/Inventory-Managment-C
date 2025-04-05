@@ -35,29 +35,30 @@ int load_inventory_from_file(Inventory *inventory, const char *filename) {
         fprintf(stderr, "Error: No se pudo abrir el archivo %s\n", filename);
         return -1;
     }
-
-    
     char buffer[256];
-
-    // Leer  y verificar 
     if (!fgets(buffer, sizeof(buffer), file)) {
-        fprintf(stderr, "Error leyendo cabecera del archivo\n");
+        fprintf(stderr, "Error leyendo buffer del archivo\n");
         fclose(file);
         return -1;
     }
+    printf("buffer: %s\n", buffer);  
+    
 
     // Leer los productos
     int count = 0;
-    while (count < inventory->capacity &&
-           fscanf(file, "%d,%49[^,],%29[^,],%lf,%d\n",
-                  &inventory->products[count].id,
-                  inventory->products[count].name,
-                  inventory->products[count].category,
-                  &inventory->products[count].price,
-                  &inventory->products[count].stock) == 5) {
-        count++;
+    while (count < inventory->capacity && fgets(buffer, sizeof(buffer), file)) {
+        if (sscanf(buffer, "%d,%49[^,],%29[^,],%lf,%d",
+                   &inventory->products[count].id,
+                   inventory->products[count].name,
+                   inventory->products[count].category,
+                   &inventory->products[count].price,
+                   &inventory->products[count].stock) == 5) {
+            count++;
+        }
     }
+    
 
+    
     inventory->count = count;
     fclose(file);
 
