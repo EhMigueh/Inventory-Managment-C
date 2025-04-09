@@ -1,5 +1,4 @@
 #include "db.h"
-#include "createdb.h"
 
 void generate_csv(const char *filename, int size)
 {
