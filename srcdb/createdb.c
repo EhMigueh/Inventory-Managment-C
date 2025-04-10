@@ -1,7 +1,9 @@
 #include "db.h"
 
+// Generador de datos aleatorios para la base de datos
 void generate_csv(const char *filename, int size)
 {
+    // Se crea la base de datos, en caso de no poder abrir el archivo -> ERROR.
     FILE *file = fopen(filename, "w");
     if (!file)
     {
@@ -17,6 +19,7 @@ void generate_csv(const char *filename, int size)
 
     fprintf(file, "ID,Nombre,Categoria,Precio,Stock\n");
 
+    // Se generan los datos aleatorios para cada producto (stock y precio) coloca esos datos en la base de datos.
     for (int i = 0; i < size; i++)
     {
         double price = random_price(2.99, 2000.00);
@@ -27,6 +30,7 @@ void generate_csv(const char *filename, int size)
     fclose(file);
 }
 
+// Generador de cadenas únicas (verifica que no se repitan).
 void generate_unique_data(char data[][MAX_NAME_LENGTH], int count)
 {
     char buffer[MAX_NAME_LENGTH];
@@ -43,6 +47,7 @@ void generate_unique_data(char data[][MAX_NAME_LENGTH], int count)
     }
 }
 
+// Generador de cadenas aleatorias (nombres y categorias).
 void generate_unique_string(char *str, int length)
 {
     const char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -53,6 +58,7 @@ void generate_unique_string(char *str, int length)
     str[length - 1] = '\0';
 }
 
+// Verifica si la cadena ya existe en el array.
 int is_duplicate(char array[][MAX_NAME_LENGTH], int size, char *value)
 {
     for (int i = 0; i < size; i++)
@@ -62,11 +68,13 @@ int is_duplicate(char array[][MAX_NAME_LENGTH], int size, char *value)
     return 0;
 }
 
+// Generador de precios aleatorios.
 double random_price(double min, double max)
 {
     return min + ((double)rand() / RAND_MAX) * (max - min);
 }
 
+// Generador de stock aleatorio.
 int random_stock(int min, int max)
 {
     return min + rand() % (max - min + 1);

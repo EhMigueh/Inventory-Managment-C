@@ -18,7 +18,7 @@ typedef struct
     int stock;
 } Product;
 
-// Estructura para inventario.
+// Estructura para representar un inventario.
 typedef struct
 {
     Product *products; // Puntero a array de productos.
@@ -27,9 +27,10 @@ typedef struct
 } Inventory;
 
 // Manejo del inventario.
-Inventory *create_inventory(int capacity);
-void free_inventory(Inventory *inventory);
-int load_inventory_from_file(Inventory *inventory, const char *filename);
-int save_inventory_to_file(Inventory *inventory, const char *filename);
-void print_inventory_sample(Inventory *inventory, int sample_size);
-void print_product(Product *product);
+Inventory *create_inventory(int);
+void free_inventory(Inventory *);
+int load_inventory_from_file(Inventory *, const char *);
+
+// Algoritmo BubbleSort por precio y stock.
+void bubble_sort_by_price(Inventory *inventory);
+void bubble_sort_by_stock(Inventory *inventory);

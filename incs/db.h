@@ -8,9 +8,9 @@
 #define MAX_NAME_LENGTH 10
 #define MAX_CATEGORY_LENGTH 10
 
-void generate_csv(const char *filename, int size);
-void generate_unique_data(char data[][MAX_NAME_LENGTH], int count);
-void generate_unique_string(char *str, int length);
-int is_duplicate(char array[][MAX_NAME_LENGTH], int size, char *value);
-double random_price(double min, double max);
-int random_stock(int min, int max);
+void generate_csv(const char *, int);
+void generate_unique_data(char data[][MAX_NAME_LENGTH], int);
+void generate_unique_string(char *, int);
+int is_duplicate(char array[][MAX_NAME_LENGTH], int, char *);
+double random_price(double, double);
+int random_stock(int, int);

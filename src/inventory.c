@@ -1,42 +1,49 @@
 #include "inventory.h"
 
+// Creación de un inventario con capacidad especificada.
 Inventory *create_inventory(int capacity)
 {
-    Inventory *inventory = (Inventory *)malloc(sizeof(Inventory));
-    if (!inventory)
+    // Asigna y verifica si se puede asignar memoria al inventario.
+    Inventory *inv = malloc(sizeof(Inventory));
+    if (!inv)
     {
-        fprintf(stderr, "ERROR No se pudo asignar memoria para el inventario\n");
+        fprintf(stderr, "ERROR No se pudo asignar memoria para el inventario.\n");
         return NULL;
     }
 
-    inventory->products = (Product *)malloc(capacity * sizeof(Product));
-    if (!inventory->products)
+    // Asigna y verifica si se puede asignar memoria para los productos.
+    inv->products = malloc(capacity * sizeof(Product));
+    if (!inv->products)
     {
-        fprintf(stderr, "ERROR No se pudo asignar memoria para los productos\n");
-        free(inventory);
+        fprintf(stderr, "ERROR No se pudo asignar memoria para los productos.\n");
+        free(inv);
         return NULL;
     }
 
-    inventory->count = 0;
-    inventory->capacity = capacity;
+    inv->count = 0;
+    inv->capacity = capacity;
 
-    return inventory;
+    return inv;
 }
 
-void free_inventory(Inventory *inventory)
+// Liberar memoria del inventario.
+void free_inventory(Inventory *inv)
 {
-    if (inventory)
-        if (inventory->products)
-            free(inventory->products);
-    free(inventory);
+    if (inv)
+    {
+        free(inv->products);
+        free(inv);
+    }
 }
 
-int load_inventory_from_file(Inventory *inventory, const char *filename)
+// Carga de inventario desde un archivo CSV.
+int load_inventory_from_file(Inventory *inv, const char *filename)
 {
+    // Verifica si el inventario y el nombre del archivo son válidos.
     FILE *file = fopen(filename, "r");
     if (!file)
     {
-        fprintf(stderr, "Error: No se pudo abrir el archivo %s\n", filename);
+        fprintf(stderr, "ERROR no se pudo abrir el archivo %s.\n", filename);
         return -1;
     }
 
@@ -44,47 +51,63 @@ int load_inventory_from_file(Inventory *inventory, const char *filename)
 
     if (!fgets(buffer, sizeof(buffer), file))
     {
-        fprintf(stderr, "Error leyendo buffer del archivo\n");
+        fprintf(stderr, "ERROR no se pudo leer el encabezado del archivo %s.\n", filename);
         fclose(file);
         return -1;
     }
 
-    fprintf(stdout, "buffer: %s\n", buffer);
-
-    // Leer los productos.
     int count = 0;
-    while (count < inventory->capacity && fgets(buffer, sizeof(buffer), file))
+
+    // Lee el archivo línea por línea y almacena los productos en el inventario.
+    while (count < inv->capacity && fgets(buffer, sizeof(buffer), file))
     {
         if (sscanf(buffer, "%d,%49[^,],%29[^,],%lf,%d",
-                   &inventory->products[count].id,
-                   inventory->products[count].name,
-                   inventory->products[count].category,
-                   &inventory->products[count].price,
-                   &inventory->products[count].stock) == 5)
+                   &inv->products[count].id,
+                   inv->products[count].name,
+                   inv->products[count].category,
+                   &inv->products[count].price,
+                   &inv->products[count].stock) == 5)
         {
             count++;
         }
     }
 
-    inventory->count = count;
+    inv->count = count;
     fclose(file);
 
     return count;
 }
 
-//  Imprimir los primeros n elementos del inventario.
-void print_inventory_sample(Inventory *inventory, int sample_size)
+// Ordena el inventario por precio usando el algoritmo BubbleSort.
+void bubble_sort_by_price(Inventory *inv)
 {
-    fprintf(stdout, "\nMuestra del inventario (%d elementos):\n", sample_size);
-    int limit = inventory->count < sample_size ? inventory->count : sample_size;
-
-    for (int i = 0; i < limit; i++)
-        print_product(&inventory->products[i]);
-
-    fprintf(stdout, "...\n");
+    for (int i = 0; i < inv->count - 1; i++)
+    {
+        for (int j = 0; j < inv->count - i - 1; j++)
+        {
+            if (inv->products[j].price > inv->products[j + 1].price)
+            {
+                Product temp = inv->products[j];
+                inv->products[j] = inv->products[j + 1];
+                inv->products[j + 1] = temp;
+            }
+        }
+    }
 }
 
-void print_product(Product *product)
+// Ordena el inventario por stock usando el algoritmo BubbleSort.
+void bubble_sort_by_stock(Inventory *inv)
 {
-    fprintf(stdout, "ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n", product->id, product->name, product->category, product->price, product->stock);
+    for (int i = 0; i < inv->count - 1; i++)
+    {
+        for (int j = 0; j < inv->count - i - 1; j++)
+        {
+            if (inv->products[j].stock > inv->products[j + 1].stock)
+            {
+                Product temp = inv->products[j];
+                inv->products[j] = inv->products[j + 1];
+                inv->products[j + 1] = temp;
+            }
+        }
+    }
 }
