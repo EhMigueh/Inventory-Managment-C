@@ -3,10 +3,11 @@
 #include <string.h>
 #include <time.h>
 
-#define SMALL_DB_SIZE 1000
-#define LARGE_DB_SIZE 10000
+#define SMALL_DB_SIZE 50000
+#define LARGE_DB_SIZE 100000
 #define MAX_NAME_LENGTH 10
 #define MAX_CATEGORY_LENGTH 10
+
 
 // Estrucutra para representar los productos.
 typedef struct
@@ -34,3 +35,6 @@ int load_inventory_from_file(Inventory *, const char *);
 // Algoritmo BubbleSort por precio y stock.
 void bubble_sort_by_price(Inventory *inventory);
 void bubble_sort_by_stock(Inventory *inventory);
+
+// Busqueda Secuencial
+int sequential_search(Inventory *inv, int id);

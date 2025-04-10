@@ -3,10 +3,13 @@
 #include <string.h>
 #include <time.h>
 
-#define SMALL_DB_SIZE 1000
-#define LARGE_DB_SIZE 10000
+#define SMALL_DB_SIZE 50000
+#define LARGE_DB_SIZE 100000
 #define MAX_NAME_LENGTH 10
 #define MAX_CATEGORY_LENGTH 10
+#define search_option 1
+
+
 
 void generate_csv(const char *, int);
 void generate_unique_data(char data[][MAX_NAME_LENGTH], int);
