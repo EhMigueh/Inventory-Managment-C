@@ -2,7 +2,7 @@
 
 int sequential_search(Inventory *inv, int id)
 {
-    for (int i = 0; i < inv->count; i++)
+    for (int i = 1; i < inv->count; i++)
     {
         if (inv->products[i].id == id)
         {
