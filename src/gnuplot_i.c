@@ -60,9 +60,7 @@ void gnuplot_plot_xy(gnuplot_ctrl *handle, const double *x, const double *y, int
 {
     fprintf(handle->gp_pipe, "plot '-' title \"%s\" with lines\n", title);
     for (int i = 0; i < n; i++)
-    {
         fprintf(handle->gp_pipe, "%lf %lf\n", x[i], y[i]);
-    }
     fprintf(handle->gp_pipe, "e\n");
     fflush(handle->gp_pipe);
 }
