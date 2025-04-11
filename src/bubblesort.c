@@ -24,6 +24,7 @@ void bubble_sort_by_price(Inventory *inv)
             }
         }
 
+        // Si no hay cambios el arreglo ya está ordenado.
         if (swapped == 0)
             break;
 
@@ -55,7 +56,7 @@ void bubble_sort_by_stock(Inventory *inv)
             }
         }
 
-        // Si no hay cambios el arreglo ya está ordenado
+        // Si no hay cambios el arreglo ya está ordenado.
         if (swapped == 0)
             break;
 
@@ -87,6 +88,7 @@ void bubble_sort_by_id(Inventory *inv)
             }
         }
 
+        // Si no hay cambios el arreglo ya está ordenado.
         if (swapped == 0)
             break;
 
@@ -118,6 +120,7 @@ void bubble_sort_by_name(Inventory *inv)
             }
         }
 
+        // Si no hay cambios el arreglo ya está ordenado.
         if (swapped == 0)
             break;
 
