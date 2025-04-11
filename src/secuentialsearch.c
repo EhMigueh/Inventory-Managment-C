@@ -73,19 +73,20 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
     else if (search_option == 2)
     {
         fprintf(stdout, "\nIntroduce el nombre a buscar: ");
-        while (getchar() != '\n');
-        
+        while (getchar() != '\n')
+            ;
+
         if (fgets(name_to_search, MAX_NAME_LENGTH, stdin) == NULL)
         {
             fprintf(stderr, "ERROR al leer el nombre.\n");
             return;
         }
-        
+
         // Eliminar el salto al final
         size_t len = strlen(name_to_search);
         if (len > 0 && name_to_search[len - 1] == '\n')
             name_to_search[len - 1] = '\0';
-        
+
         fprintf(stdout, "\n");
 
         Inventory *dbs[] = {first_inv, second_inv, third_inv, fourth_inv, fifth_inv};

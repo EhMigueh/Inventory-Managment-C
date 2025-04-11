@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "gnuplot_i.h"
 
 #define FIRST_DB_SIZE 10000
 #define SECOND_DB_SIZE 25000
@@ -33,6 +34,9 @@ typedef struct
 Inventory *create_inventory(int);
 void free_inventory(Inventory *);
 int load_inventory_from_file(Inventory *, const char *);
+
+// Funciones para graficar.
+void plot_sort_times(int *, double *, int, const char *, const char *);
 
 // Algoritmo BubbleSort por precio y stock.
 void handle_bubble_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
