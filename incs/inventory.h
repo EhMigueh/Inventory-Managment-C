@@ -42,11 +42,18 @@ void plot_sort_times(int *, double *, int, const char *, const char *);
 void handle_bubble_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
 void bubble_sort_by_price(Inventory *);
 void bubble_sort_by_stock(Inventory *);
-
+void bubble_sort_by_name(Inventory *inv);
+void bubble_sort_by_id(Inventory *inv);
 // Busqueda Secuencial
 void handle_sequential_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
 int sequential_search(Inventory *, int);
 int sequential_search_by_name(Inventory *, const char *);
 
 // Busqueda Binaria
-// NEXT
+void handle_binary_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
+int binary_search_by_id(Inventory *, int);
+int binary_search_by_name(Inventory *, const char *);
+
+// Busqueda Binaria Optimizada (Recursiva)
+int binary_search_by_id_recursive(Inventory *, int, int, int);
+int binary_search_by_name_recursive(Inventory *, const char *, int, int);

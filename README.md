@@ -41,3 +41,5 @@ Implementar correctamente algoritmos de ordenación (Bubble Sort, Selection Sort
 
 ## Documentación 📚
 
+
+## comentar sobre el makefile, utilización código, instalación de gnuplot...
