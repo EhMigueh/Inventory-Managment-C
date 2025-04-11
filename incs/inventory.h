@@ -37,7 +37,7 @@ int load_inventory_from_file(Inventory *, const char *);
 
 // Funciones para graficar.
 void plot_sort_times(int *, double *, int, const char *, const char *);
-
+void plot_search_times(int *sizes, double *times, int count, const char *title, const char *label);
 // Algoritmo BubbleSort.
 void handle_bubble_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
 void bubble_sort_by_price(Inventory *);
@@ -49,6 +49,7 @@ void bubble_sort_by_id(Inventory *inv);
 void handle_sequential_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
 int sequential_search(Inventory *, int);
 int sequential_search_by_name(Inventory *, const char *);
+int sequential_search_by_price_range(Inventory *inventory, double min_price, double max_price, Product **results, int max_results);
 
 // Algoritmo Busqueda Binaria
 void handle_binary_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);

@@ -21,3 +21,31 @@ void plot_sort_times(int *sizes, double *times, int n, const char *titulo, const
     free(sizes_double);
     gnuplot_close(gp);
 }
+
+void plot_search_times(int *sizes, double *times, int count, const char *title, const char *label)
+{
+
+    char filename[128];
+    snprintf(filename, sizeof(filename), "plots/%s.png", label); 
+
+    FILE *gp = popen("gnuplot -persistent", "w");
+    if (gp == NULL)
+    {
+        fprintf(stderr, "Error al abrir gnuplot.\n");
+        return;
+    }
+
+    fprintf(gp, "set terminal png\n");
+    fprintf(gp, "set output '%s'\n", filename);
+    fprintf(gp, "set title \"%s\"\n", title);
+    fprintf(gp, "set xlabel \"Tamaño de la base de datos\"\n");
+    fprintf(gp, "set ylabel \"Tiempo de búsqueda (segundos)\"\n");
+    fprintf(gp, "plot '-' using 1:2 title \"%s\" with linespoints\n", label);
+
+    for (int i = 0; i < count; i++)
+        fprintf(gp, "%d %f\n", sizes[i], times[i]);
+
+    fprintf(gp, "e\n");
+
+    pclose(gp);
+}
