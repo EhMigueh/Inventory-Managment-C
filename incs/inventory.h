@@ -42,3 +42,7 @@ void bubble_sort_by_stock(Inventory *);
 // Busqueda Secuencial
 void handle_sequential_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
 int sequential_search(Inventory *, int);
+int sequential_search_by_name(Inventory *, const char *);
+
+// Busqueda Binaria
+// NEXT
