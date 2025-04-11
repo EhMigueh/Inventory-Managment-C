@@ -45,7 +45,7 @@ int main(void)
         fprintf(stdout, "2. Realizar pruebas de ordenamiento SELECTION SORT (en progreso).\n");
         fprintf(stdout, "3. Realizar pruebas de ordenamiento INSERTION SORT (en progreso).\n");
         fprintf(stdout, "4. Realizar pruebas de búsqueda SECUENCIAL.\n");
-        fprintf(stdout, "5. Realizar pruebas de búsqueda BINARIA (en progreso).\n");
+        fprintf(stdout, "5. Realizar pruebas de búsqueda BINARIA (funcional, revisar).\n");
         fprintf(stdout, "6. Realizar COMPARATIVA ORDENAMIENTO (en progreso).\n");
         fprintf(stdout, "7. Realizar COMPARATIVA BUSQUEDA (en progreso).\n");
         fprintf(stdout, "0. Salir.");
@@ -74,7 +74,8 @@ int main(void)
             handle_sequential_search(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 5:
-            fprintf(stdout, "\nBúsqueda BINARIA (en progreso).\n\n");
+            fprintf(stdout, "\nBúsqueda BINARIA.\n\n");
+            handle_binary_search(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 6:
             fprintf(stdout, "\nComparativa de ORDENAMIENTO (en progreso).\n\n");
