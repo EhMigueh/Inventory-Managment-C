@@ -77,37 +77,3 @@ int load_inventory_from_file(Inventory *inv, const char *filename)
 
     return count;
 }
-
-// Ordena el inventario por precio usando el algoritmo BubbleSort.
-void bubble_sort_by_price(Inventory *inv)
-{
-    for (int i = 0; i < inv->count - 1; i++)
-    {
-        for (int j = 0; j < inv->count - i - 1; j++)
-        {
-            if (inv->products[j].price > inv->products[j + 1].price)
-            {
-                Product temp = inv->products[j];
-                inv->products[j] = inv->products[j + 1];
-                inv->products[j + 1] = temp;
-            }
-        }
-    }
-}
-
-// Ordena el inventario por stock usando el algoritmo BubbleSort.
-void bubble_sort_by_stock(Inventory *inv)
-{
-    for (int i = 0; i < inv->count - 1; i++)
-    {
-        for (int j = 0; j < inv->count - i - 1; j++)
-        {
-            if (inv->products[j].stock > inv->products[j + 1].stock)
-            {
-                Product temp = inv->products[j];
-                inv->products[j] = inv->products[j + 1];
-                inv->products[j + 1] = temp;
-            }
-        }
-    }
-}
