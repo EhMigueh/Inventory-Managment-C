@@ -1,6 +1,6 @@
 #include "inventory.h"
 
-// Implementación iterativa de búsqueda binaria por ID
+// Implementación iterativa de búsqueda binaria por ID.
 int binary_search_by_id(Inventory *inv, int id)
 {
     int left = 0;
@@ -8,7 +8,7 @@ int binary_search_by_id(Inventory *inv, int id)
 
     while (left <= right)
     {
-        int mid = left + (right - left) / 2; // Evita overflow
+        int mid = left + (right - left) / 2; // Evita overflow.
 
         if (inv->products[mid].id == id)
             return mid;
@@ -19,16 +19,16 @@ int binary_search_by_id(Inventory *inv, int id)
             right = mid - 1;
     }
 
-    return -1; // No encontrado
+    return -1; // No encontrado.
 }
 
-// Implementación recursiva por ID
+// Implementación recursiva por ID.
 int binary_search_by_id_recursive(Inventory *inv, int id, int left, int right)
 {
     if (left > right)
-        return -1; // Caso base no se encontro
+        return -1; // Caso base no se encontro.
 
-    int mid = left + (right - left) / 2; //Evitar el overflow
+    int mid = left + (right - left) / 2; // Evitar el overflow.
 
     if (inv->products[mid].id == id)
         return mid;
@@ -39,7 +39,7 @@ int binary_search_by_id_recursive(Inventory *inv, int id, int left, int right)
         return binary_search_by_id_recursive(inv, id, left, mid - 1);
 }
 
-// Implementación iterativa de búsqueda binaria por nombre
+// Implementación iterativa de búsqueda binaria por nombre.
 int binary_search_by_name(Inventory *inv, const char *name)
 {
     int left = 0;
@@ -47,7 +47,7 @@ int binary_search_by_name(Inventory *inv, const char *name)
 
     while (left <= right)
     {
-        int mid = left + (right - left) / 2; // Evitar el overflow
+        int mid = left + (right - left) / 2; // Evitar el overflow.
         int cmp = strcmp(inv->products[mid].name, name);
 
         if (cmp == 0)
@@ -59,16 +59,16 @@ int binary_search_by_name(Inventory *inv, const char *name)
             right = mid - 1;
     }
 
-    return -1; 
+    return -1;
 }
 
-// Implementacion optimizada recursiva de busqueda binaria por nombre
+// Implementacion optimizada recursiva de busqueda binaria por nombre.
 int binary_search_by_name_recursive(Inventory *inv, const char *name, int left, int right)
 {
     if (left > right)
-        return -1; // Caso base no se encontro
+        return -1; // Caso base no se encontro.
 
-    int mid = left + (right - left) / 2; // Evitar el overflow
+    int mid = left + (right - left) / 2; // Evitar el overflow.
     int cmp = strcmp(inv->products[mid].name, name);
 
     if (cmp == 0)

@@ -1,6 +1,6 @@
 #include "inventory.h"
 
-// Función para graficar los tiempos de ordenamiento
+// Función para graficar los tiempos de ordenamiento.
 void plot_sort_times(int *sizes, double *times, int n, const char *titulo, const char *nombre_archivo)
 {
     gnuplot_ctrl *gp = gnuplot_init();
@@ -26,7 +26,7 @@ void plot_search_times(int *sizes, double *times, int count, const char *title, 
 {
 
     char filename[128];
-    snprintf(filename, sizeof(filename), "plots/%s.png", label); 
+    snprintf(filename, sizeof(filename), "plots/%s.png", label);
 
     FILE *gp = popen("gnuplot -persistent", "w");
     if (gp == NULL)

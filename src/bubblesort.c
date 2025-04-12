@@ -1,6 +1,6 @@
 #include "inventory.h"
 
-// Ordena el inventario por precio
+// Ordena el inventario por precio.
 void bubble_sort_by_price(Inventory *inv)
 {
     int n = inv->count;
@@ -32,7 +32,7 @@ void bubble_sort_by_price(Inventory *inv)
     }
 }
 
-// Ordena el inventario por stock
+// Ordena el inventario por stock.
 void bubble_sort_by_stock(Inventory *inv)
 {
     int n = inv->count;
@@ -64,7 +64,7 @@ void bubble_sort_by_stock(Inventory *inv)
     }
 }
 
-// Ordena el inventario por ID
+// Ordena el inventario por ID.
 void bubble_sort_by_id(Inventory *inv)
 {
     int n = inv->count;
@@ -96,7 +96,7 @@ void bubble_sort_by_id(Inventory *inv)
     }
 }
 
-// Ordena el inventario por nombre con optimizacion
+// Ordena el inventario por nombre con optimizacion.
 void bubble_sort_by_name(Inventory *inv)
 {
     int n = inv->count;

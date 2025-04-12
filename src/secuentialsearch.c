@@ -1,6 +1,6 @@
 #include "inventory.h"
 
-//  busqueda secuencial por ID
+//  busqueda secuencial por ID.
 int sequential_search_by_id(Inventory *inv, int id)
 {
     for (int i = 0; i < inv->count; i++)
@@ -10,7 +10,7 @@ int sequential_search_by_id(Inventory *inv, int id)
     return -1;
 }
 
-// busqueda secuencial por nombre
+// busqueda secuencial por nombre.
 int sequential_search_by_name(Inventory *inv, const char *name)
 {
     for (int i = 0; i < inv->count; i++)
@@ -20,7 +20,7 @@ int sequential_search_by_name(Inventory *inv, const char *name)
     return -1;
 }
 
-// Búsqueda secuencial por rango de precio
+// Búsqueda secuencial por rango de precio.
 int sequential_search_by_price_range(Inventory *inventory, double min_price, double max_price, Product **results, int max_results)
 {
     int count = 0;

@@ -71,7 +71,7 @@ void gnuplot_saveplot(gnuplot_ctrl *handle, const char *filename)
     fprintf(handle->gp_pipe, "set terminal pngcairo size 800,600\n");
     fprintf(handle->gp_pipe, "set output \"%s\"\n", filename);
     fprintf(handle->gp_pipe, "replot\n");
-    fprintf(handle->gp_pipe, "set output\n"); // cerrar el archivo
+    fprintf(handle->gp_pipe, "set output\n"); // Cerrar el archivo de salida.
     fprintf(handle->gp_pipe, "set terminal pop\n");
     fflush(handle->gp_pipe);
 }

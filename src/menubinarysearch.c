@@ -35,17 +35,15 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
             ;
         return;
     }
-    
-    // Validar que sea 0 o 1
+
+    // Validar que sea 0 o 1.
     if (use_recursive != 0 && use_recursive != 1)
     {
         fprintf(stderr, "ERROR opción inválida. Solo se permite 0 (iterativa) o 1 (recursiva).\n");
         return;
     }
-    
 
-
-    // Crear copias de los inventarios para no alterar los originales
+    // Crear copias de los inventarios para no alterar los originales.
     Inventory *dbs[] = {first_inv, second_inv, third_inv, fourth_inv, fifth_inv};
     int sizes[] = {10000, 25000, 50000, 75000, 100000};
     int results[5];
@@ -103,22 +101,20 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
     {
         fprintf(stdout, "\nIntroduce el nombre a buscar: ");
         while (getchar() != '\n')
-            ; 
-        
+            ;
+
         if (fgets(name_to_search, MAX_NAME_LENGTH, stdin) == NULL)
         {
             fprintf(stderr, "ERROR al leer el nombre.\n");
             return;
         }
-        
 
         size_t len = strlen(name_to_search);
         if (len > 0 && name_to_search[len - 1] == '\n')
             name_to_search[len - 1] = '\0';
-        
+
         fprintf(stdout, "\n");
 
-        
         fprintf(stdout, "Ordenando inventarios por nombre para la búsqueda binaria...\n");
         for (int i = 0; i < 5; i++)
         {
