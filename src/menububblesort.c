@@ -22,6 +22,7 @@ void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *
             ;
         return;
     }
+    fprintf(stdout, "\n");
 
     if (search_option == 0)
     {
