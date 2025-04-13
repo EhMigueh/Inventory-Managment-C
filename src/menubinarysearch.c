@@ -152,7 +152,8 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
         
         // Generar gráfico para búsqueda binaria por nombre
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Nombre" : "Búsqueda Binaria Iterativa por Nombre";
-        const char *plot_filename = use_recursive ? "Binary_Recursive_Name" : "Binary_Iterative_Name";
+        const char *plot_filename = use_recursive ? "Binary Recursive Name" : "Binary Iterative Name";
+        
         plot_search_times(sizes, times, 5, plot_title, plot_filename);
         
         fprintf(stdout, "Búsqueda binaria por nombre completada. Su gráfico quedó guardado en 'plots'.\n\n");

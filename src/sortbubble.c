@@ -4,26 +4,20 @@
 void bubble_sort_by_price(Inventory *inv)
 {
     int n = inv->count;
-    int swapped;
-    
-    for (int i = 0; i < n - 1; i++)
+    while (n > 1)
     {
-        swapped = 0;
-        
-        for (int j = 0; j < n - i - 1; j++)
+        int new_limit = 0;
+        for (int j = 0; j < n - 1; j++)
         {
             if (inv->products[j].price > inv->products[j + 1].price)
             {
                 Product temp = inv->products[j];
                 inv->products[j] = inv->products[j + 1];
                 inv->products[j + 1] = temp;
-                swapped = 1;
+                new_limit = j + 1;
             }
         }
-        
-        // Si no hay cambios el arreglo ya está ordenado.
-        if (swapped == 0)
-            break;
+        n = new_limit;
     }
 }
 
@@ -31,26 +25,20 @@ void bubble_sort_by_price(Inventory *inv)
 void bubble_sort_by_stock(Inventory *inv)
 {
     int n = inv->count;
-    int swapped;
-    
-    for (int i = 0; i < n - 1; i++)
+    while (n > 1)
     {
-        swapped = 0;
-        
-        for (int j = 0; j < n - i - 1; j++)
+        int new_limit = 0;
+        for (int j = 0; j < n - 1; j++)
         {
             if (inv->products[j].stock > inv->products[j + 1].stock)
             {
                 Product temp = inv->products[j];
                 inv->products[j] = inv->products[j + 1];
                 inv->products[j + 1] = temp;
-                swapped = 1;
+                new_limit = j + 1;
             }
         }
-        
-        // Si no hay cambios el arreglo ya está ordenado.
-        if (swapped == 0)
-            break;
+        n = new_limit;
     }
 }
 
@@ -58,26 +46,20 @@ void bubble_sort_by_stock(Inventory *inv)
 void bubble_sort_by_id(Inventory *inv)
 {
     int n = inv->count;
-    int swapped;
-    
-    for (int i = 0; i < n - 1; i++)
+    while (n > 1)
     {
-        swapped = 0;
-        
-        for (int j = 0; j < n - i - 1; j++)
+        int new_limit = 0;
+        for (int j = 0; j < n - 1; j++)
         {
             if (inv->products[j].id > inv->products[j + 1].id)
             {
                 Product temp = inv->products[j];
                 inv->products[j] = inv->products[j + 1];
                 inv->products[j + 1] = temp;
-                swapped = 1;
+                new_limit = j + 1;
             }
         }
-        
-        // Si no hay cambios el arreglo ya está ordenado.
-        if (swapped == 0)
-            break;
+        n = new_limit;
     }
 }
 
@@ -85,25 +67,19 @@ void bubble_sort_by_id(Inventory *inv)
 void bubble_sort_by_name(Inventory *inv)
 {
     int n = inv->count;
-    int swapped;
-    
-    for (int i = 0; i < n - 1; i++)
+    while (n > 1)
     {
-        swapped = 0;
-        
-        for (int j = 0; j < n - i - 1; j++)
+        int new_limit = 0;
+        for (int j = 0; j < n - 1; j++)
         {
             if (strcmp(inv->products[j].name, inv->products[j + 1].name) > 0)
             {
                 Product temp = inv->products[j];
                 inv->products[j] = inv->products[j + 1];
                 inv->products[j + 1] = temp;
-                swapped = 1;
+                new_limit = j + 1;
             }
         }
-        
-        // Si no hay cambios el arreglo ya está ordenado.
-        if (swapped == 0)
-            break;
+        n = new_limit;
     }
 }
