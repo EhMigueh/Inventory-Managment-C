@@ -70,6 +70,7 @@ int main(void)
             break;
         case 6:
             fprintf(stdout, "\nComparativa de ORDENAMIENTO (en progreso).\n\n");
+            handle_comparative_sort(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 7:
             fprintf(stdout, "\nComparativa de BÚSQUEDA (en progreso).\n\n");

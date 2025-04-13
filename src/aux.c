@@ -57,3 +57,39 @@ void plot_search_times(int *sizes, double *times, int count, const char *title, 
 
     pclose(gp);
 }
+
+void plot_comparative_sort_times(int *sizes, double *bubble_times, double *selection_times, double *insertion_times, int count, const char *label) {
+    FILE *gnuplot = popen("gnuplot -persistent", "w");
+    if (!gnuplot) {
+        fprintf(stderr, "Error al abrir Gnuplot.\n");
+        return;
+    }
+
+    char output_filename[256];
+    snprintf(output_filename, sizeof(output_filename), "plots/Comparativa%s.png", label);
+
+    fprintf(gnuplot, "set terminal png size 800,600\n");
+    fprintf(gnuplot, "set output '%s'\n", output_filename);
+    fprintf(gnuplot, "set title 'Comparación de algoritmos por %s'\n", label);
+    fprintf(gnuplot, "set xlabel 'Cantidad de elementos'\n");
+    fprintf(gnuplot, "set ylabel 'Tiempo (segundos)'\n");
+    fprintf(gnuplot, "set grid\n");
+    fprintf(gnuplot, "plot '-' using 1:2 with linespoints title 'Bubble Sort', "
+                     "'-' using 1:2 with linespoints title 'Selection Sort', "
+                     "'-' using 1:2 with linespoints title 'Insertion Sort'\n");
+
+    for (int i = 0; i < count; i++)
+        fprintf(gnuplot, "%d %f\n", sizes[i], bubble_times[i]);
+    fprintf(gnuplot, "e\n");
+
+    for (int i = 0; i < count; i++)
+        fprintf(gnuplot, "%d %f\n", sizes[i], selection_times[i]);
+    fprintf(gnuplot, "e\n");
+
+    for (int i = 0; i < count; i++)
+        fprintf(gnuplot, "%d %f\n", sizes[i], insertion_times[i]);
+    fprintf(gnuplot, "e\n");
+
+    pclose(gnuplot);
+}
+          
