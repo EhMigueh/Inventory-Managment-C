@@ -37,7 +37,7 @@ int main(void)
         fprintf(stdout, "2. Realizar pruebas de ordenamiento SELECTION SORT.\n");
         fprintf(stdout, "3. Realizar pruebas de ordenamiento INSERTION SORT.\n");
         fprintf(stdout, "4. Realizar pruebas de búsqueda SECUENCIAL.\n");
-        fprintf(stdout, "5. Realizar pruebas de búsqueda BINARIA (funcional, revisar).\n");
+        fprintf(stdout, "5. Realizar pruebas de búsqueda BINARIA .\n");
         fprintf(stdout, "6. Realizar COMPARATIVA ORDENAMIENTO (en progreso).\n");
         fprintf(stdout, "7. Realizar COMPARATIVA BUSQUEDA (en progreso).\n");
         fprintf(stdout, "0. Salir.");
