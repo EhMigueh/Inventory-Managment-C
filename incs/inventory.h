@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <stdbool.h>
 #include "gnuplot_i.h"
 
 #define FIRST_DB_SIZE 10000
@@ -36,12 +37,10 @@ void free_inventory(Inventory *);
 void free_invs(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
 int load_inventory_from_file(Inventory *, const char *);
 
-// Funciones para graficar.
-void plot_sort_times(int *, double *, int, const char *, const char *);
-void plot_search_times(int *, double *, int, const char *, const char *);
-
 // Funciones Auxiliares.
 void print_stats(Inventory *, int size);
+void plot_sort_times(int *, double *, int, const char *, const char *);
+void plot_search_times(int *, double *, int, const char *, const char *);
 
 // Algoritmo BubbleSort.
 void handle_bubble_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
@@ -49,6 +48,20 @@ void bubble_sort_by_price(Inventory *);
 void bubble_sort_by_stock(Inventory *);
 void bubble_sort_by_name(Inventory *);
 void bubble_sort_by_id(Inventory *);
+
+// Algoritmo InsertionSort.
+void handle_insertion_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
+void insertion_sort_by_price(Inventory *);
+void insertion_sort_by_stock(Inventory *);
+void insertion_sort_by_name(Inventory *);
+void insertion_sort_by_id(Inventory *);
+
+// Algoritmo SelectionSort.
+void handle_selection_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
+void selection_sort_by_price(Inventory *);
+void selection_sort_by_stock(Inventory *);
+void selection_sort_by_name(Inventory *);
+void selection_sort_by_id(Inventory *);
 
 // Algoritmo Busqueda Secuencial
 void handle_sequential_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);

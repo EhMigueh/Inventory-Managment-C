@@ -34,8 +34,8 @@ int main(void)
     {
         fprintf(stdout, "Selecciona una opción:\n");
         fprintf(stdout, "1. Realizar pruebas de ordenamiento BUBBLE SORT.\n");
-        fprintf(stdout, "2. Realizar pruebas de ordenamiento SELECTION SORT (en progreso).\n");
-        fprintf(stdout, "3. Realizar pruebas de ordenamiento INSERTION SORT (en progreso).\n");
+        fprintf(stdout, "2. Realizar pruebas de ordenamiento SELECTION SORT.\n");
+        fprintf(stdout, "3. Realizar pruebas de ordenamiento INSERTION SORT.\n");
         fprintf(stdout, "4. Realizar pruebas de búsqueda SECUENCIAL.\n");
         fprintf(stdout, "5. Realizar pruebas de búsqueda BINARIA (funcional, revisar).\n");
         fprintf(stdout, "6. Realizar COMPARATIVA ORDENAMIENTO (en progreso).\n");
@@ -57,10 +57,10 @@ int main(void)
             handle_bubble_sort(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 2:
-            fprintf(stdout, "\nOrdenamiento por SELECTION SORT (en progreso).\n\n");
+            handle_selection_sort(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 3:
-            fprintf(stdout, "\nOrdenamiento por INSERTION SORT (en progreso).\n\n");
+            handle_insertion_sort(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 4:
             handle_sequential_search(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);

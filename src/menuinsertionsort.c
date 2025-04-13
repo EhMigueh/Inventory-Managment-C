@@ -1,6 +1,6 @@
 #include "inventory.h"
 
-void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
+void handle_insertion_sort(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
 {
     int search_option;
     clock_t start, end;
@@ -33,10 +33,10 @@ void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *
         return;
     }
 
-    void (*sort_functions[])(Inventory *) = {bubble_sort_by_price, bubble_sort_by_stock, bubble_sort_by_id, bubble_sort_by_name};
+    void (*sort_functions[])(Inventory *) = {insertion_sort_by_price, insertion_sort_by_stock, insertion_sort_by_id, insertion_sort_by_name};
     const char *labels[] = {"precio", "stock", "ID", "nombre"};
-    const char *plot_titles[] = {"Bubble Sort por precio", "Bubble Sort por stock", "Bubble Sort por ID", "Bubble Sort por nombre"};
-    const char *plot_filenames[] = {"Bubble Price", "Bubble Stock", "Bubble ID", "Bubble Name"};
+    const char *plot_titles[] = {"Insertion Sort por precio", "Insertion Sort por stock", "Insertion Sort por ID", "Insertion Sort por nombre"};
+    const char *plot_filenames[] = {"Insertion Price", "Insertion Stock", "Insertion ID", "Insertion Name"};
 
     if (search_option < 1 || search_option > 4)
     {
