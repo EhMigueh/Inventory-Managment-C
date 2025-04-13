@@ -94,9 +94,6 @@ void handle_comparative_sort(Inventory *first_inv, Inventory *second_inv, Invent
     fprintf(stdout, "Ordenamiento por %s completado. Sus gráficos quedaron guardados en 'plots'.\n\n", labels[index]);
 
     // Generar gráficos para los tres algoritmos
-    //plot_sort_times(sizes, bubble_times, 5, "Bubble Sort", plot_filenames[index]);
-    //plot_sort_times(sizes, selection_times, 5, "Selection Sort", plot_filenames[index]);
-    //plot_sort_times(sizes, insertion_times, 5, "Insertion Sort", plot_filenames[index]);
     plot_comparative_sort_times(sizes, bubble_times, selection_times, insertion_times, 5, labels[index]);
     fprintf(stdout, "Gráficos generados y guardados en 'plots'.\n\n");
     fprintf(stdout, "Presiona ENTER para continuar...\n\n");
