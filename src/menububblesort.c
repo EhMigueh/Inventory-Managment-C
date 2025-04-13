@@ -1,7 +1,6 @@
 #include "inventory.h"
 
-void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
-{
+void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv) {
     int search_option;
     clock_t start, end;
     double time;
@@ -60,8 +59,7 @@ void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *
         times[i] = time;
         fprintf(stdout, "Tiempo de ordenamiento por %s (base de datos de %d objetos): %.4f segundos.\n", labels[index], sizes[i], time);
         print_stats(dbs[i], 5);
+        
     }
-
-    fprintf(stdout, "Ordenamiento por %s completado. Su gráfico quedó guardado en 'plots'.\n\n", labels[index]);
     plot_sort_times(sizes, times, 5, plot_titles[index], plot_filenames[index]);
 }

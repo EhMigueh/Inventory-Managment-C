@@ -1,25 +1,32 @@
 #include "inventory.h"
 
+
 void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
 {
     int search_option, id_to_search, use_recursive;
     char name_to_search[MAX_NAME_LENGTH];
     clock_t start, end;
     double time;
+    double times[5];
+
+    system("clear");
 
     fprintf(stdout, "\nSelecciona el tipo de búsqueda:\n");
     fprintf(stdout, "1. Búsqueda binaria por ID.\n");
-    fprintf(stdout, "2. Búsqueda binaria por nombre. (Requiere arreglo o revision)\n");
+    fprintf(stdout, "2. Búsqueda binaria por nombre.\n");
+    fprintf(stdout, "3. Búsqueda binaria por rango de precios.\n");
     fprintf(stdout, "0. Volver al menú principal.\n");
     fprintf(stdout, "\nSelecciona una opción: ");
 
     if (scanf("%d", &search_option) != 1)
     {
-        fprintf(stderr, "ERROR entrada no válida. Por favor, introduce un número.\n");
+        fprintf(stderr, "\nERROR entrada no válida. Por favor, introduce un número.\n\n");
         while (getchar() != '\n')
             ;
         return;
     }
+
+    system("clear");
 
     if (search_option == 0)
     {
@@ -27,10 +34,10 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
         return;
     }
 
-    fprintf(stdout, "\n¿Deseas usar la versión recursiva (1) o iterativa (0)? \n");
+    fprintf(stdout, "\n¿Deseas usar la versión recursiva (1) o iterativa (0)? ");
     if (scanf("%d", &use_recursive) != 1)
     {
-        fprintf(stderr, "ERROR entrada no válida. Por favor, introduce un número.\n");
+        fprintf(stderr, "\nERROR entrada no válida. Por favor, introduce un número.\n\n");
         while (getchar() != '\n')
             ;
         return;
@@ -39,7 +46,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
     // Validar que sea 0 o 1.
     if (use_recursive != 0 && use_recursive != 1)
     {
-        fprintf(stderr, "ERROR opción inválida. Solo se permite 0 (iterativa) o 1 (recursiva).\n");
+        fprintf(stderr, "\nERROR opción inválida. Solo se permite 0 (iterativa) o 1 (recursiva).\n\n");
         return;
     }
 
@@ -53,7 +60,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
         fprintf(stdout, "\nIntroduce el ID a buscar: ");
         if (scanf("%d", &id_to_search) != 1)
         {
-            fprintf(stderr, "ERROR entrada no válida. Por favor, introduce un número.\n");
+            fprintf(stderr, "\nERROR entrada no válida. Por favor, introduce un número.\n\n");
             while (getchar() != '\n')
                 ;
             return;
@@ -76,26 +83,25 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
                 results[i] = binary_search_by_id(dbs[i], id_to_search);
             end = clock();
             time = (double)(end - start) / CLOCKS_PER_SEC;
-            fprintf(stdout, "Tiempo de búsqueda binaria por ID (base de datos %d): %.4f segundos.\n", sizes[i], time);
-        }
-
-        fprintf(stdout, "\nResultados de la búsqueda:\n\n");
-        for (int i = 0; i < 5; i++)
-        {
+            times[i] = time;
+            fprintf(stdout, "Tiempo de búsqueda binaria por ID (BD %d): %.4f seg\n", sizes[i], time);
+            
             if (results[i] != -1)
             {
-                fprintf(stdout, "En base de datos %d: Producto encontrado en posición %d\n", sizes[i], results[i]);
-                fprintf(stdout, "ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n",
-                        dbs[i]->products[results[i]].id,
-                        dbs[i]->products[results[i]].name,
-                        dbs[i]->products[results[i]].category,
-                        dbs[i]->products[results[i]].price,
-                        dbs[i]->products[results[i]].stock);
+                Product *p = &dbs[i]->products[results[i]];
+                fprintf(stdout, "Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n", 
+                        results[i], p->id, p->name, p->category, p->price, p->stock);
             }
             else
-                fprintf(stdout, "En base de datos %d: Producto NO encontrado.\n\n", sizes[i]);
+                fprintf(stdout, "Producto NO encontrado.\n\n");
         }
-        fprintf(stdout, "Búsqueda binaria por ID completada.\n\n");
+        
+        // Generar gráfico para búsqueda binaria por ID
+        const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por ID" : "Búsqueda Binaria Iterativa por ID";
+        const char *plot_filename = use_recursive ? "Binary_Recursive_ID" : "Binary_Iterative_ID";
+        plot_search_times(sizes, times, 5, plot_title, plot_filename);
+        
+        fprintf(stdout, "Búsqueda binaria por ID completada. Su gráfico quedó guardado en 'plots'.\n\n");
     }
     else if (search_option == 2)
     {
@@ -105,7 +111,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
 
         if (fgets(name_to_search, MAX_NAME_LENGTH, stdin) == NULL)
         {
-            fprintf(stderr, "ERROR al leer el nombre.\n");
+            fprintf(stderr, "\nERROR al leer el nombre.\n\n");
             return;
         }
 
@@ -131,30 +137,90 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
                 results[i] = binary_search_by_name(dbs[i], name_to_search);
             end = clock();
             time = (double)(end - start) / CLOCKS_PER_SEC;
-            fprintf(stdout, "Tiempo de búsqueda binaria por nombre (base de datos %d): %.4f segundos.\n", sizes[i], time);
-        }
-
-        fprintf(stdout, "\nResultados de la búsqueda:\n\n");
-        for (int i = 0; i < 5; i++)
-        {
+            times[i] = time;
+            fprintf(stdout, "Tiempo de búsqueda binaria por nombre (BD %d): %.4f seg\n", sizes[i], time);
+            
             if (results[i] != -1)
             {
-                fprintf(stdout, "En base de datos %d: Producto encontrado en posición %d\n", sizes[i], results[i]);
-                fprintf(stdout, "ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n",
-                        dbs[i]->products[results[i]].id,
-                        dbs[i]->products[results[i]].name,
-                        dbs[i]->products[results[i]].category,
-                        dbs[i]->products[results[i]].price,
-                        dbs[i]->products[results[i]].stock);
+                Product *p = &dbs[i]->products[results[i]];
+                fprintf(stdout, "Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n", 
+                        results[i], p->id, p->name, p->category, p->price, p->stock);
             }
             else
-                fprintf(stdout, "En base de datos %d: Producto NO encontrado.\n\n", sizes[i]);
+                fprintf(stdout, "Producto NO encontrado.\n\n");
         }
-        fprintf(stdout, "Búsqueda binaria por nombre completada.\n\n");
+        
+        // Generar gráfico para búsqueda binaria por nombre
+        const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Nombre" : "Búsqueda Binaria Iterativa por Nombre";
+        const char *plot_filename = use_recursive ? "Binary_Recursive_Name" : "Binary_Iterative_Name";
+        plot_search_times(sizes, times, 5, plot_title, plot_filename);
+        
+        fprintf(stdout, "Búsqueda binaria por nombre completada. Su gráfico quedó guardado en 'plots'.\n\n");
+    }
+    else if (search_option == 3)
+    {
+        double min_price, max_price;
+        fprintf(stdout, "\nIntroduce el precio mínimo: ");
+        if (scanf("%lf", &min_price) != 1)
+        {
+            fprintf(stderr, "\nERROR introduce un número válido.\n\n");
+            return;
+        }
+
+        fprintf(stdout, "Introduce el precio máximo: ");
+        if (scanf("%lf", &max_price) != 1)
+        {
+            fprintf(stderr, "\nERROR introduce un número válido.\n\n");
+            return;
+        }
+        fprintf(stdout, "\n");
+
+        fprintf(stdout, "Ordenando inventarios por precio para la búsqueda binaria...\n");
+        for (int i = 0; i < 5; i++)
+        {
+            bubble_sort_by_price(dbs[i]);
+        }
+        fprintf(stdout, "Ordenamiento completado.\n\n");
+
+        for (int i = 0; i < 5; i++)
+        {
+            Product *results_array[50];
+            start = clock();
+            
+            int found;
+            if (use_recursive)
+                found = binary_search_by_price_range_recursive(dbs[i], min_price, max_price, results_array, 10);
+            else
+                found = binary_search_by_price_range(dbs[i], min_price, max_price, results_array, 10);
+                
+            end = clock();
+            time = (double)(end - start) / CLOCKS_PER_SEC;
+            times[i] = time;
+            
+            fprintf(stdout, "Base de datos de %d → %d resultados en %.4f seg:\n", sizes[i], found, time);
+            if (found == 0)
+                fprintf(stdout, "\nNo hay productos en ese rango.\n");
+            else
+            {
+                for (int j = 0; j < found; j++)
+                {
+                    Product *p = results_array[j];
+                    fprintf(stdout, "ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n", p->id, p->name, p->category, p->price, p->stock);
+                }
+                fprintf(stdout, "\n");
+            }
+        }
+        
+        //  gráfico para búsqueda binaria por rango de precios
+        const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Rango de Precios" : "Búsqueda Binaria Iterativa por Rango de Precios";
+        const char *plot_filename = use_recursive ? "Binary_Recursive_Price_Range" : "Binary_Iterative_Price_Range";
+        plot_search_times(sizes, times, 5, plot_title, plot_filename);
+        
+        fprintf(stdout, "Búsqueda binaria por rango de precios completada. Su gráfico quedó guardado en 'plots'.\n\n");
     }
     else
     {
-        fprintf(stderr, "\nERROR opción inválida. Solo se permite 0, 1 o 2.\n\n");
+        fprintf(stderr, "\nERROR opción inválida. Solo se permite 0, 1, 2 o 3.\n\n");
         return;
     }
 }
