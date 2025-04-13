@@ -7,6 +7,8 @@ void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *
     double time;
     double times[5];
 
+    system("clear");
+
     fprintf(stdout, "\nSelecciona el tipo de ordenamiento:\n");
     fprintf(stdout, "1. Ordenar por precio.\n");
     fprintf(stdout, "2. Ordenar por stock.\n");
@@ -17,23 +19,25 @@ void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *
 
     if (scanf("%d", &search_option) != 1)
     {
-        fprintf(stderr, "ERROR entrada no válida. Por favor, introduce un número.\n");
+        fprintf(stderr, "\nERROR entrada no válida. Por favor, introduce un número.\n\n");
         while (getchar() != '\n')
             ;
         return;
     }
-    fprintf(stdout, "\n");
+
+    system("clear");
 
     if (search_option == 0)
     {
-        fprintf(stdout, "\nVolviendo al menú principal...\n\n");
+        fprintf(stdout, "Volviendo al menú principal...\n\n");
         return;
     }
 
+    Inventory *dbs[] = {first_inv, second_inv, third_inv, fourth_inv, fifth_inv};
+    int sizes[] = {10000, 25000, 50000, 75000, 100000};
+
     if (search_option == 1)
     {
-        Inventory *dbs[] = {first_inv, second_inv, third_inv, fourth_inv, fifth_inv};
-        int sizes[] = {10000, 25000, 50000, 75000, 100000};
         for (int i = 0; i < 5; i++)
         {
             start = clock();
@@ -42,14 +46,13 @@ void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
             fprintf(stdout, "Tiempo de ordenamiento por precio (base de datos de %d objetos): %.4f segundos.\n", sizes[i], time);
+            print_stats(dbs[i], 5);
         }
-        fprintf(stdout, "\nOrdenamiento por precio completado. Su gráfico quedó guardado en 'plots'.\n\n");
+        fprintf(stdout, "Ordenamiento por precio completado. Su gráfico quedó guardado en 'plots'.\n\n");
         plot_sort_times(sizes, times, 5, "Bubble Sort por precio", "Bubble Price");
     }
     else if (search_option == 2)
     {
-        Inventory *dbs[] = {first_inv, second_inv, third_inv, fourth_inv, fifth_inv};
-        int sizes[] = {10000, 25000, 50000, 75000, 100000};
         for (int i = 0; i < 5; i++)
         {
             start = clock();
@@ -58,14 +61,13 @@ void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
             fprintf(stdout, "Tiempo de ordenamiento por stock (base de datos de %d objetos): %.4f segundos.\n", sizes[i], time);
+            print_stats(dbs[i], 5);
         }
-        fprintf(stdout, "\nOrdenamiento por stock completado. Su gráfico quedó guardado en 'plots'.\n\n");
+        fprintf(stdout, "Ordenamiento por stock completado. Su gráfico quedó guardado en 'plots'.\n\n");
         plot_sort_times(sizes, times, 5, "Bubble Sort por stock", "Bubble Stock");
     }
     else if (search_option == 3)
     {
-        Inventory *dbs[] = {first_inv, second_inv, third_inv, fourth_inv, fifth_inv};
-        int sizes[] = {10000, 25000, 50000, 75000, 100000};
         for (int i = 0; i < 5; i++)
         {
             start = clock();
@@ -74,14 +76,13 @@ void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
             fprintf(stdout, "Tiempo de ordenamiento por ID (base de datos de %d objetos): %.4f segundos.\n", sizes[i], time);
+            print_stats(dbs[i], 5);
         }
-        fprintf(stdout, "\nOrdenamiento por ID completado. Su gráfico quedó guardado en 'plots'.\n\n");
+        fprintf(stdout, "Ordenamiento por ID completado. Su gráfico quedó guardado en 'plots'.\n\n");
         plot_sort_times(sizes, times, 5, "Bubble Sort por ID", "Bubble ID");
     }
     else if (search_option == 4)
     {
-        Inventory *dbs[] = {first_inv, second_inv, third_inv, fourth_inv, fifth_inv};
-        int sizes[] = {10000, 25000, 50000, 75000, 100000};
         for (int i = 0; i < 5; i++)
         {
             start = clock();
@@ -90,13 +91,14 @@ void handle_bubble_sort(Inventory *first_inv, Inventory *second_inv, Inventory *
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
             fprintf(stdout, "Tiempo de ordenamiento por nombre (base de datos de %d objetos): %.4f segundos.\n", sizes[i], time);
+            print_stats(dbs[i], 5);
         }
-        fprintf(stdout, "\nOrdenamiento por nombre completado. Su gráfico quedó guardado en 'plots'.\n\n");
+        fprintf(stdout, "Ordenamiento por nombre completado. Su gráfico quedó guardado en 'plots'.\n\n");
         plot_sort_times(sizes, times, 5, "Bubble Sort por nombre", "Bubble Name");
     }
     else
     {
-        fprintf(stderr, "\nERROR opción inválida. Solo se permite 0, 1 o 2.\n\n");
+        fprintf(stderr, "ERROR opción inválida. Solo se permite 0, 1, 2, 3 o 4.\n\n");
         return;
     }
 }

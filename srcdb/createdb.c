@@ -23,7 +23,7 @@ void generate_csv(const char *filename, int size)
     for (int i = 0; i < size; i++)
     {
         double price = random_price(2.99, 2000.00);
-        int stock = random_stock(0, 50);
+        int stock = random_stock(0, 1000);
         fprintf(file, "%d,%s,%s,%.2f,%d\n", i + 1, names[i], categories[i], price, stock);
     }
 

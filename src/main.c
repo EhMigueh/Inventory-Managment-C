@@ -8,30 +8,22 @@ int main(void)
     Inventory *fourth_inv = create_inventory(FOURTH_DB_SIZE);
     Inventory *fifth_inv = create_inventory(FIFTH_DB_SIZE);
 
+    // Verifica si se crearon correctamente los inventarios.
     if (!first_inv || !second_inv || !third_inv || !fourth_inv || !fifth_inv)
     {
-        fprintf(stderr, "ERROR creando inventario.\n");
+        fprintf(stderr, "\nERROR creando inventario.\n");
         return EXIT_FAILURE;
     }
 
-    fprintf(stdout, "\nCargando las bases de datos.\n");
-    if (load_inventory_from_file(first_inv, "./db/database10.csv") < 0 ||
-        load_inventory_from_file(second_inv, "./db/database25.csv") < 0 ||
-        load_inventory_from_file(third_inv, "./db/database50.csv") < 0 ||
-        load_inventory_from_file(fourth_inv, "./db/database75.csv") < 0 ||
-        load_inventory_from_file(fifth_inv, "./db/database100.csv") < 0)
+    // Carga los inventarios desde los archivos CSV a una estructura.
+    if (load_inventory_from_file(first_inv, "./db/database10.csv") < 0 || load_inventory_from_file(second_inv, "./db/database25.csv") < 0 || load_inventory_from_file(third_inv, "./db/database50.csv") < 0 || load_inventory_from_file(fourth_inv, "./db/database75.csv") < 0 || load_inventory_from_file(fifth_inv, "./db/database100.csv") < 0)
     {
-        fprintf(stderr, "ERROR cargando las bases de datos.\n");
-        free_inventory(first_inv);
-        free_inventory(second_inv);
-        free_inventory(third_inv);
-        free_inventory(fourth_inv);
-        free_inventory(fifth_inv);
+        fprintf(stderr, "\nERROR cargando las bases de datos.\n");
+        free_invs(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
         return EXIT_FAILURE;
     }
-    fprintf(stdout, "Bases de datos cargadas.\n\n");
 
-    fprintf(stdout, "Primera base de datos cargada con %d productos.\n", first_inv->count);
+    fprintf(stdout, "\nPrimera base de datos cargada con %d productos.\n", first_inv->count);
     fprintf(stdout, "Segunda base de datos cargada con %d productos.\n", second_inv->count);
     fprintf(stdout, "Tercera base de datos cargada con %d productos.\n", third_inv->count);
     fprintf(stdout, "Cuarta base de datos cargada con %d productos.\n", fourth_inv->count);
@@ -53,7 +45,7 @@ int main(void)
         fprintf(stdout, "\n\nSelecciona una opción: ");
         if (scanf("%d", &option) != 1)
         {
-            fprintf(stderr, "ERROR entrada no válida. Por favor, introduce un número.\n");
+            fprintf(stderr, "\nERROR entrada no válida. Por favor, introduce un número.\n\n");
             while (getchar() != '\n')
                 ;
             continue;
@@ -74,7 +66,6 @@ int main(void)
             handle_sequential_search(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 5:
-            fprintf(stdout, "\nBúsqueda BINARIA.\n\n");
             handle_binary_search(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 6:
@@ -85,11 +76,7 @@ int main(void)
             break;
         case 0:
             fprintf(stdout, "\nSaliendo del programa...\n\n");
-            free_inventory(first_inv);
-            free_inventory(second_inv);
-            free_inventory(third_inv);
-            free_inventory(fourth_inv);
-            free_inventory(fifth_inv);
+            free_invs(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             return EXIT_SUCCESS;
         default:
             fprintf(stderr, "\nOpción no válida. Por favor, selecciona una opción válida.\n\n");

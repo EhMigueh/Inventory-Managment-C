@@ -8,6 +8,8 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
     double time;
     double times[5];
 
+    system("clear");
+
     fprintf(stdout, "\nSelecciona el tipo de búsqueda secuencial:\n");
     fprintf(stdout, "1. Búsqueda por ID.\n");
     fprintf(stdout, "2. Búsqueda por nombre exacto.\n");
@@ -17,11 +19,13 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
 
     if (scanf("%d", &search_option) != 1)
     {
-        fprintf(stderr, "ERROR entrada no válida. Por favor, introduce un número.\n");
+        fprintf(stderr, "\nERROR entrada no válida. Por favor, introduce un número.\n\n");
         while (getchar() != '\n')
             ;
         return;
     }
+
+    system("clear");
 
     if (search_option == 0)
     {
@@ -37,7 +41,7 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
         fprintf(stdout, "\nIntroduce el ID a buscar: ");
         if (scanf("%d", &id_to_search) != 1)
         {
-            fprintf(stderr, "ERROR entrada no válida.\n");
+            fprintf(stderr, "\nERROR entrada no válida.\n\n");
             while (getchar() != '\n')
                 ;
             return;
@@ -53,24 +57,16 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
             fprintf(stdout, "Tiempo (BD %d): %.4f seg\n", sizes[i], time);
-        }
-        plot_search_times(sizes, times, 5, "Búsqueda Secuencial por ID", "Search ID");
-        fprintf(stdout, "\n");
-
-        for (int i = 0; i < 5; i++)
-        {
             if (results[i] != -1)
             {
                 Product *p = &dbs[i]->products[results[i]];
-                fprintf(stdout, "BD %d → Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n",
-                        sizes[i], results[i], p->id, p->name, p->category, p->price, p->stock);
+                fprintf(stdout, "Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n", results[i], p->id, p->name, p->category, p->price, p->stock);
             }
             else
-                fprintf(stdout, "BD %d → Producto NO encontrado.\n\n", sizes[i]);
+                fprintf(stdout, "Producto NO encontrado.\n\n");
         }
-        fprintf(stdout, "\n");
+        plot_search_times(sizes, times, 5, "Búsqueda Secuencial por ID", "Search ID");
     }
-
     else if (search_option == 2)
     {
         fprintf(stdout, "\nIntroduce el nombre: ");
@@ -78,7 +74,7 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
             ;
         if (fgets(name_to_search, MAX_NAME_LENGTH, stdin) == NULL)
         {
-            fprintf(stderr, "ERROR al leer el nombre.\n");
+            fprintf(stderr, "\nERROR al leer el nombre.\n");
             return;
         }
         fprintf(stdout, "\n");
@@ -100,30 +96,27 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
             if (pos != -1)
             {
                 Product *p = &dbs[i]->products[pos];
-                fprintf(stdout, "Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n",
-                        pos, p->id, p->name, p->category, p->price, p->stock);
+                fprintf(stdout, "Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n", pos, p->id, p->name, p->category, p->price, p->stock);
             }
             else
                 fprintf(stdout, "Producto NO encontrado.\n\n");
         }
-
         plot_search_times(sizes, times, 5, "Búsqueda Secuencial por Nombre", "Search Name");
     }
-
     else if (search_option == 3)
     {
         double min_price, max_price;
         fprintf(stdout, "\nIntroduce el precio mínimo: ");
         if (scanf("%lf", &min_price) != 1)
         {
-            fprintf(stderr, "ERROR.\n");
+            fprintf(stderr, "\nERROR introduce un número válido.\n\n");
             return;
         }
 
         fprintf(stdout, "Introduce el precio máximo: ");
         if (scanf("%lf", &max_price) != 1)
         {
-            fprintf(stderr, "ERROR.\n");
+            fprintf(stderr, "\nERROR introduce un número válido.\n\n");
             return;
         }
         fprintf(stdout, "\n");
@@ -132,32 +125,28 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
         {
             Product *results[50];
             start = clock();
-            int found = sequential_search_by_price_range(dbs[i], min_price, max_price, results, 50);
+            int found = sequential_search_by_price_range(dbs[i], min_price, max_price, results, 10);
             end = clock();
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
-
-            fprintf(stdout, "BD %d → %d resultados en %.4f seg:\n", sizes[i], found, time);
+            fprintf(stdout, "Base de datos de %d → %d resultados en %.4f seg:\n", sizes[i], found, time);
             if (found == 0)
-                fprintf(stdout, "No hay productos en ese rango.\n\n");
+                fprintf(stdout, "\nNo hay productos en ese rango.\n");
             else
             {
                 for (int j = 0; j < found; j++)
                 {
                     Product *p = results[j];
-                    fprintf(stdout, "ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n",
-                            p->id, p->name, p->category, p->price, p->stock);
+                    fprintf(stdout, "ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n", p->id, p->name, p->category, p->price, p->stock);
                 }
                 fprintf(stdout, "\n");
             }
         }
-
         plot_search_times(sizes, times, 5, "Búsqueda Secuencial por Precio", "Search Price");
     }
-
     else
     {
-        fprintf(stderr, "\nERROR opción inválida. Selecciona entre 0, 1, 2 y 4.\n\n");
+        fprintf(stderr, "ERROR opción inválida. Selecciona entre 0, 1, 2 o 3.\n\n");
         return;
     }
 }

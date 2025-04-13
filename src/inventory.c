@@ -7,7 +7,7 @@ Inventory *create_inventory(int capacity)
     Inventory *inv = malloc(sizeof(Inventory));
     if (!inv)
     {
-        fprintf(stderr, "ERROR No se pudo asignar memoria para el inventario.\n");
+        fprintf(stderr, "\nERROR No se pudo asignar memoria para el inventario.\n");
         return NULL;
     }
 
@@ -15,7 +15,7 @@ Inventory *create_inventory(int capacity)
     inv->products = malloc(capacity * sizeof(Product));
     if (!inv->products)
     {
-        fprintf(stderr, "ERROR No se pudo asignar memoria para los productos.\n");
+        fprintf(stderr, "\nERROR No se pudo asignar memoria para los productos.\n");
         free(inv);
         return NULL;
     }
@@ -36,6 +36,16 @@ void free_inventory(Inventory *inv)
     }
 }
 
+// Liberar memoria de varios inventarios.
+void free_invs(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
+{
+    free_inventory(first_inv);
+    free_inventory(second_inv);
+    free_inventory(third_inv);
+    free_inventory(fourth_inv);
+    free_inventory(fifth_inv);
+}
+
 // Carga de inventario desde un archivo CSV.
 int load_inventory_from_file(Inventory *inv, const char *filename)
 {
@@ -43,7 +53,7 @@ int load_inventory_from_file(Inventory *inv, const char *filename)
     FILE *file = fopen(filename, "r");
     if (!file)
     {
-        fprintf(stderr, "ERROR no se pudo abrir el archivo %s.\n", filename);
+        fprintf(stderr, "\nERROR no se pudo abrir el archivo %s.\n", filename);
         return -1;
     }
 
@@ -51,7 +61,7 @@ int load_inventory_from_file(Inventory *inv, const char *filename)
 
     if (!fgets(buffer, sizeof(buffer), file))
     {
-        fprintf(stderr, "ERROR no se pudo leer el encabezado del archivo %s.\n", filename);
+        fprintf(stderr, "\nERROR no se pudo leer el encabezado del archivo %s.\n", filename);
         fclose(file);
         return -1;
     }
@@ -60,17 +70,8 @@ int load_inventory_from_file(Inventory *inv, const char *filename)
 
     // Lee el archivo línea por línea y almacena los productos en el inventario.
     while (count < inv->capacity && fgets(buffer, sizeof(buffer), file))
-    {
-        if (sscanf(buffer, "%d,%49[^,],%29[^,],%lf,%d",
-                   &inv->products[count].id,
-                   inv->products[count].name,
-                   inv->products[count].category,
-                   &inv->products[count].price,
-                   &inv->products[count].stock) == 5)
-        {
+        if (sscanf(buffer, "%d,%49[^,],%29[^,],%lf,%d", &inv->products[count].id, inv->products[count].name, inv->products[count].category, &inv->products[count].price, &inv->products[count].stock) == 5)
             count++;
-        }
-    }
 
     inv->count = count;
     fclose(file);

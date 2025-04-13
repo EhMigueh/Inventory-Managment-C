@@ -33,11 +33,15 @@ typedef struct
 // Manejo del inventario.
 Inventory *create_inventory(int);
 void free_inventory(Inventory *);
+void free_invs(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
 int load_inventory_from_file(Inventory *, const char *);
 
 // Funciones para graficar.
 void plot_sort_times(int *, double *, int, const char *, const char *);
 void plot_search_times(int *, double *, int, const char *, const char *);
+
+// Funciones Auxiliares.
+void print_stats(Inventory *, int size);
 
 // Algoritmo BubbleSort.
 void handle_bubble_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
