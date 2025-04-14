@@ -47,6 +47,9 @@ void clean_terminal();
 void plot_test_times(int *, double *, int, const char *, const char *, const char *);
 void plot_comparative_sort_times(int *, double *, double *, double *, int, const char *, const char *, const char *);
 
+// Funciones de Error.
+void save_sorted_inventory(Inventory *, const char *);
+
 // Algoritmo BubbleSort.
 void handle_bubble_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
 void bubble_sort_by_price(Inventory *);
