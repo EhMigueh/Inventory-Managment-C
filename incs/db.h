@@ -12,6 +12,7 @@
 #define MAX_CATEGORY_LENGTH 10
 
 void generate_csv(const char *, int);
+void shuffle_array(int *, int);
 void generate_unique_data(char data[][MAX_NAME_LENGTH], int);
 void generate_unique_string(char *, int);
 int is_duplicate(char array[][MAX_NAME_LENGTH], int, char *);

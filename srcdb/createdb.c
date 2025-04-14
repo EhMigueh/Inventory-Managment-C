@@ -13,7 +13,13 @@ void generate_csv(const char *filename, int size)
 
     char names[size][MAX_NAME_LENGTH];
     char categories[size][MAX_CATEGORY_LENGTH];
+    int ids[size];
 
+    // Llenar y mezclar IDs
+    for (int i = 0; i < size; i++)
+        ids[i] = i + 1;
+
+    shuffle_array(ids, size);
     generate_unique_data(names, size);
     generate_unique_data(categories, size);
 
@@ -24,10 +30,22 @@ void generate_csv(const char *filename, int size)
     {
         double price = random_price(2.99, 2000.00);
         int stock = random_stock(0, 1000);
-        fprintf(file, "%d,%s,%s,%.2f,%d\n", i + 1, names[i], categories[i], price, stock);
+        fprintf(file, "%d,%s,%s,%.2f,%d\n", ids[i], names[i], categories[i], price, stock);
     }
 
     fclose(file);
+}
+
+// Mezcla las IDs de los productos para que no estén en orden utilizando el algoritmo Fisher-Yates.
+void shuffle_array(int *array, int n)
+{
+    for (int i = n - 1; i > 0; i--)
+    {
+        int j = rand() % (i + 1);
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 }
 
 // Generador de cadenas únicas (verifica que no se repitan).
