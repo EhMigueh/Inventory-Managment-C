@@ -4,7 +4,7 @@ int main(void)
 {
     srand((unsigned int)time(NULL));
 
-    fprintf(stdout, "\nCREADO Bases de Datos...\n\n");
+    fprintf(stdout, "\nCREANDO Bases de Datos...\n\n");
 
     generate_csv("./db/database10.csv", FIRST_DB_SIZE);
     fprintf(stdout, "Base de Datos de 10000 objetos CREADA.\n");

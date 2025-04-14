@@ -7,19 +7,16 @@ void insertion_sort_by_price(Inventory *inv)
 
     for (int i = 1; i < n; i++)
     {
-        Product *current = &inv->products[i];
-        float current_price = current->price;
+        Product key = inv->products[i];
 
-        // Si el elemnto ya está en su lugar, no se hace nada.
-        if (inv->products[i - 1].price <= current_price)
+        // Evita mover elementos si ya están en orden.
+        if (inv->products[i - 1].price <= key.price)
             continue;
 
-        // Copia el producto actual.
-        Product key = *current;
         int j = i - 1;
 
         // Desplaza los elementos mayores al producto actual hacia la derecha.
-        while (j >= 0 && inv->products[j].price > current_price)
+        while (j >= 0 && inv->products[j].price > key.price)
         {
             inv->products[j + 1] = inv->products[j];
             j--;
@@ -36,19 +33,16 @@ void insertion_sort_by_stock(Inventory *inv)
 
     for (int i = 1; i < n; i++)
     {
-        Product *current = &inv->products[i];
-        int current_stock = current->stock;
+        Product key = inv->products[i];
 
-        // Si el elemnto ya está en su lugar, no se hace nada.
-        if (inv->products[i - 1].stock <= current_stock)
+        // Evita mover elementos si ya están en orden.
+        if (inv->products[i - 1].stock <= key.stock)
             continue;
 
-        // Copia el producto actual.
-        Product key = *current;
         int j = i - 1;
 
         // Desplaza los elementos mayores al producto actual hacia la derecha.
-        while (j >= 0 && inv->products[j].stock > current_stock)
+        while (j >= 0 && inv->products[j].stock > key.stock)
         {
             inv->products[j + 1] = inv->products[j];
             j--;
@@ -65,19 +59,16 @@ void insertion_sort_by_id(Inventory *inv)
 
     for (int i = 1; i < n; i++)
     {
-        Product *current = &inv->products[i];
-        int current_id = current->id;
+        Product key = inv->products[i];
 
-        // Si el elemnto ya está en su lugar, no se hace nada.
-        if (inv->products[i - 1].id <= current_id)
+        // Evita mover elementos si ya están en orden.
+        if (inv->products[i - 1].id <= key.id)
             continue;
 
-        // Copia el producto actual.
-        Product key = *current;
         int j = i - 1;
 
         // Desplaza los elementos mayores al producto actual hacia la derecha.
-        while (j >= 0 && inv->products[j].id > current_id)
+        while (j >= 0 && inv->products[j].id > key.id)
         {
             inv->products[j + 1] = inv->products[j];
             j--;
@@ -94,19 +85,16 @@ void insertion_sort_by_name(Inventory *inv)
 
     for (int i = 1; i < n; i++)
     {
-        Product *current = &inv->products[i];
-        char *current_name = current->name;
+        Product key = inv->products[i];
 
-        // Si el elemnto ya está en su lugar, no se hace nada.
-        if (strcmp(inv->products[i - 1].name, current_name) <= 0)
+        // Evita mover elementos si ya están en orden.
+        if (strcmp(inv->products[i - 1].name, key.name) <= 0)
             continue;
 
-        // Copia el producto actual.
-        Product key = *current;
         int j = i - 1;
 
         // Desplaza los elementos mayores al producto actual hacia la derecha.
-        while (j >= 0 && strcmp(inv->products[j].name, current_name) > 0)
+        while (j >= 0 && strcmp(inv->products[j].name, key.name) > 0)
         {
             inv->products[j + 1] = inv->products[j];
             j--;
