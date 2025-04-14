@@ -57,8 +57,8 @@ int load_inventory_from_file(Inventory *inv, const char *filename)
         return -1;
     }
 
+    // Verifica si el inventario tiene capacidad.
     char buffer[256];
-
     if (!fgets(buffer, sizeof(buffer), file))
     {
         fprintf(stderr, "\nERROR no se pudo leer el encabezado del archivo %s.\n", filename);
@@ -77,4 +77,15 @@ int load_inventory_from_file(Inventory *inv, const char *filename)
     fclose(file);
 
     return count;
+}
+
+// Carga de todos los inventarios desde archivos CSV y verifica si se cargaron correctamente.
+void load_all_inventories(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
+{
+    if (load_inventory_from_file(first_inv, "./db/database10.csv") < 0 || load_inventory_from_file(second_inv, "./db/database25.csv") < 0 || load_inventory_from_file(third_inv, "./db/database50.csv") < 0 || load_inventory_from_file(fourth_inv, "./db/database75.csv") < 0 || load_inventory_from_file(fifth_inv, "./db/database100.csv") < 0)
+    {
+        fprintf(stderr, "\nERROR cargando las bases de datos.\n");
+        free_invs(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
+        exit(EXIT_FAILURE);
+    }
 }

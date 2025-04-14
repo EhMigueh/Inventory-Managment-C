@@ -1,6 +1,5 @@
 #include "inventory.h"
 
-
 void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
 {
     int search_option, id_to_search, use_recursive;
@@ -85,22 +84,22 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
             fprintf(stdout, "Tiempo de búsqueda binaria por ID (BD %d): %.4f seg\n", sizes[i], time);
-            
+
             if (results[i] != -1)
             {
                 Product *p = &dbs[i]->products[results[i]];
-                fprintf(stdout, "Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n", 
+                fprintf(stdout, "Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n",
                         results[i], p->id, p->name, p->category, p->price, p->stock);
             }
             else
                 fprintf(stdout, "Producto NO encontrado.\n\n");
         }
-        
+
         // Generar gráfico para búsqueda binaria por ID
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por ID" : "Búsqueda Binaria Iterativa por ID";
-        const char *plot_filename = use_recursive ? "Binary Recursive ID" : "Binary Iterative ID";        
+        const char *plot_filename = use_recursive ? "Binary Recursive ID" : "Binary Iterative ID";
         plot_search_times(sizes, times, 5, plot_title, plot_filename);
-        
+
         fprintf(stdout, "Búsqueda binaria por ID completada. Su gráfico quedó guardado en 'plots'.\n\n");
     }
     else if (search_option == 2)
@@ -139,23 +138,23 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
             fprintf(stdout, "Tiempo de búsqueda binaria por nombre (BD %d): %.4f seg\n", sizes[i], time);
-            
+
             if (results[i] != -1)
             {
                 Product *p = &dbs[i]->products[results[i]];
-                fprintf(stdout, "Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n", 
+                fprintf(stdout, "Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n",
                         results[i], p->id, p->name, p->category, p->price, p->stock);
             }
             else
                 fprintf(stdout, "Producto NO encontrado.\n\n");
         }
-        
+
         // Generar gráfico para búsqueda binaria por nombre
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Nombre" : "Búsqueda Binaria Iterativa por Nombre";
         const char *plot_filename = use_recursive ? "Binary Recursive Name" : "Binary Iterative Name";
-        
+
         plot_search_times(sizes, times, 5, plot_title, plot_filename);
-        
+
         fprintf(stdout, "Búsqueda binaria por nombre completada. Su gráfico quedó guardado en 'plots'.\n\n");
     }
     else if (search_option == 3)
@@ -187,17 +186,17 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
         {
             Product *results_array[50];
             start = clock();
-            
+
             int found;
             if (use_recursive)
                 found = binary_search_by_price_range_recursive(dbs[i], min_price, max_price, results_array, 10);
             else
                 found = binary_search_by_price_range(dbs[i], min_price, max_price, results_array, 10);
-                
+
             end = clock();
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
-            
+
             fprintf(stdout, "Base de datos de %d → %d resultados en %.4f seg:\n", sizes[i], found, time);
             if (found == 0)
                 fprintf(stdout, "\nNo hay productos en ese rango.\n");
@@ -211,13 +210,13 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
                 fprintf(stdout, "\n");
             }
         }
-        
+
         //  gráfico para búsqueda binaria por rango de precios
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Rango de Precios" : "Búsqueda Binaria Iterativa por Rango de Precios";
         const char *plot_filename = use_recursive ? "Binary Recursive Price Range" : "Binary Iterative Price Range";
-        
+
         plot_search_times(sizes, times, 5, plot_title, plot_filename);
-        
+
         fprintf(stdout, "Búsqueda binaria por rango de precios completada. Su gráfico quedó guardado en 'plots'.\n\n");
     }
     else

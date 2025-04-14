@@ -9,13 +9,9 @@ void handle_selection_sort(Inventory *first_inv, Inventory *second_inv, Inventor
 
     system("clear");
 
-    fprintf(stdout, "\nSelecciona el tipo de ordenamiento:\n");
-    fprintf(stdout, "1. Ordenar por precio.\n");
-    fprintf(stdout, "2. Ordenar por stock.\n");
-    fprintf(stdout, "3. Ordenar por ID.\n");
-    fprintf(stdout, "4. Ordenar por nombre.\n");
-    fprintf(stdout, "0. Volver al menú principal.\n");
+    print_menu_sort();
 
+    // Solicita al usuario una opción para realizar una acción, en caso de no ser válida, se atrapa.
     fprintf(stdout, "\nSelecciona una opción: ");
     if (scanf("%d", &search_option) != 1)
     {
@@ -58,10 +54,10 @@ void handle_selection_sort(Inventory *first_inv, Inventory *second_inv, Inventor
         end = clock();
         time = (double)(end - start) / CLOCKS_PER_SEC;
         times[i] = time;
-        fprintf(stdout, "Tiempo de ordenamiento por %s (base de datos de %d objetos): %.4f segundos.\n", labels[index], sizes[i], time);
+        fprintf(stdout, "Tiempo de ordenamiento Selection Sort por %s (base de datos de %d objetos): %.4f segundos.\n", labels[index], sizes[i], time);
         print_stats(dbs[i], 5);
     }
 
-    fprintf(stdout, "Ordenamiento por %s completado. Su gráfico quedó guardado en 'plots'.\n\n", labels[index]);
+    fprintf(stdout, "Ordenamiento Selection Sort por %s completado. Su gráfico quedó guardado en 'plots'.", labels[index]);
     plot_sort_times(sizes, times, 5, plot_titles[index], plot_filenames[index]);
 }

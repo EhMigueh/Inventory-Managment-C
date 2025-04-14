@@ -15,33 +15,20 @@ int main(void)
         return EXIT_FAILURE;
     }
 
-    // Carga los inventarios desde los archivos CSV a una estructura.
-    if (load_inventory_from_file(first_inv, "./db/database10.csv") < 0 || load_inventory_from_file(second_inv, "./db/database25.csv") < 0 || load_inventory_from_file(third_inv, "./db/database50.csv") < 0 || load_inventory_from_file(fourth_inv, "./db/database75.csv") < 0 || load_inventory_from_file(fifth_inv, "./db/database100.csv") < 0)
-    {
-        fprintf(stderr, "\nERROR cargando las bases de datos.\n");
-        free_invs(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
-        return EXIT_FAILURE;
-    }
+    load_all_inventories(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
 
     fprintf(stdout, "\nPrimera base de datos cargada con %d productos.\n", first_inv->count);
     fprintf(stdout, "Segunda base de datos cargada con %d productos.\n", second_inv->count);
     fprintf(stdout, "Tercera base de datos cargada con %d productos.\n", third_inv->count);
     fprintf(stdout, "Cuarta base de datos cargada con %d productos.\n", fourth_inv->count);
-    fprintf(stdout, "Quinta base de datos cargada con %d productos.\n\n", fifth_inv->count);
+    fprintf(stdout, "Quinta base de datos cargada con %d productos.", fifth_inv->count);
 
     int option;
     while (1)
     {
-        fprintf(stdout, "Selecciona una opción:\n");
-        fprintf(stdout, "1. Realizar pruebas de ordenamiento BUBBLE SORT.\n");
-        fprintf(stdout, "2. Realizar pruebas de ordenamiento SELECTION SORT.\n");
-        fprintf(stdout, "3. Realizar pruebas de ordenamiento INSERTION SORT.\n");
-        fprintf(stdout, "4. Realizar pruebas de búsqueda SECUENCIAL.\n");
-        fprintf(stdout, "5. Realizar pruebas de búsqueda BINARIA .\n");
-        fprintf(stdout, "6. Realizar COMPARATIVA ORDENAMIENTO (en progreso).\n");
-        fprintf(stdout, "7. Realizar COMPARATIVA BUSQUEDA (en progreso).\n");
-        fprintf(stdout, "0. Salir.");
+        print_menu();
 
+        // Solicita al usuario una opción para realizar una acción, en caso de no ser válida, se atrapa.
         fprintf(stdout, "\n\nSelecciona una opción: ");
         if (scanf("%d", &option) != 1)
         {
@@ -55,21 +42,25 @@ int main(void)
         {
         case 1:
             handle_bubble_sort(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
+            load_all_inventories(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 2:
             handle_selection_sort(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
+            load_all_inventories(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 3:
             handle_insertion_sort(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
+            load_all_inventories(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 4:
             handle_sequential_search(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
+            load_all_inventories(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 5:
             handle_binary_search(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
+            load_all_inventories(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 6:
-            fprintf(stdout, "\nComparativa de ORDENAMIENTO (en progreso).\n\n");
             handle_comparative_sort(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 7:

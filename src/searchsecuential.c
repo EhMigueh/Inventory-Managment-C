@@ -9,6 +9,7 @@ int sequential_search_by_id(Inventory *inv, int id)
 
     return -1;
 }
+
 // busqueda secuencial por nombre.
 int sequential_search_by_name(Inventory *inv, const char *name)
 {
