@@ -41,10 +41,11 @@ void load_all_inventories(Inventory *, Inventory *, Inventory *, Inventory *, In
 // Funciones Auxiliares.
 void print_menu();
 void print_menu_sort();
-void print_stats(Inventory *, int size);
-void plot_sort_times(int *, double *, int, const char *, const char *);
-void plot_search_times(int *, double *, int, const char *, const char *);
-void plot_comparative_sort_times(int *, double *, double *, double *, int, const char *);
+void print_menu_search();
+void print_stats(Inventory *, int);
+void clean_terminal();
+void plot_test_times(int *, double *, int, const char *, const char *, const char *);
+void plot_comparative_sort_times(int *, double *, double *, double *, int, const char *, const char *, const char *);
 
 // Algoritmo BubbleSort.
 void handle_bubble_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);

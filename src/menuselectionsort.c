@@ -7,7 +7,7 @@ void handle_selection_sort(Inventory *first_inv, Inventory *second_inv, Inventor
     double time;
     double times[5];
 
-    system("clear");
+    clean_terminal();
 
     print_menu_sort();
 
@@ -15,7 +15,7 @@ void handle_selection_sort(Inventory *first_inv, Inventory *second_inv, Inventor
     fprintf(stdout, "\nSelecciona una opción: ");
     if (scanf("%d", &search_option) != 1)
     {
-        system("clear");
+        clean_terminal();
         fprintf(stderr, "\nERROR entrada no válida. Por favor, introduce un número.\n\n");
         while (getchar() != '\n')
             ;
@@ -24,7 +24,7 @@ void handle_selection_sort(Inventory *first_inv, Inventory *second_inv, Inventor
 
     if (search_option == 0)
     {
-        system("clear");
+        clean_terminal();
         fprintf(stdout, "Volviendo al menú principal...\n\n");
         return;
     }
@@ -33,15 +33,16 @@ void handle_selection_sort(Inventory *first_inv, Inventory *second_inv, Inventor
     const char *labels[] = {"precio", "stock", "ID", "nombre"};
     const char *plot_titles[] = {"Selection Sort por precio", "Selection Sort por stock", "Selection Sort por ID", "Selection Sort por nombre"};
     const char *plot_filenames[] = {"Selection Price", "Selection Stock", "Selection ID", "Selection Name"};
+    const char *plot_route = "selectionsort";
 
     if (search_option < 1 || search_option > 4)
     {
-        system("clear");
+        clean_terminal();
         fprintf(stderr, "ERROR opción inválida. Solo se permite 0, 1, 2, 3 o 4.\n\n");
         return;
     }
 
-    system("clear");
+    clean_terminal();
 
     Inventory *dbs[] = {first_inv, second_inv, third_inv, fourth_inv, fifth_inv};
     int sizes[] = {10000, 25000, 50000, 75000, 100000};
@@ -59,5 +60,5 @@ void handle_selection_sort(Inventory *first_inv, Inventory *second_inv, Inventor
     }
 
     fprintf(stdout, "Ordenamiento Selection Sort por %s completado. Su gráfico quedó guardado en 'plots'.", labels[index]);
-    plot_sort_times(sizes, times, 5, plot_titles[index], plot_filenames[index]);
+    plot_test_times(sizes, times, 5, plot_titles[index], plot_route, plot_filenames[index]);
 }

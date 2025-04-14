@@ -8,40 +8,40 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
     double time;
     double times[5];
 
-    system("clear");
+    clean_terminal();
 
-    fprintf(stdout, "\nSelecciona el tipo de búsqueda secuencial:\n");
-    fprintf(stdout, "1. Búsqueda por ID.\n");
-    fprintf(stdout, "2. Búsqueda por nombre exacto.\n");
-    fprintf(stdout, "3. Búsqueda por rango de precios.\n");
-    fprintf(stdout, "0. Volver al menú principal.\n");
+    print_menu_search();
+
+    // Solicita al usuario una opción para realizar una acción, en caso de no ser válida, se atrapa.
     fprintf(stdout, "\nSelecciona una opción: ");
-
     if (scanf("%d", &search_option) != 1)
     {
+        clean_terminal();
         fprintf(stderr, "\nERROR entrada no válida. Por favor, introduce un número.\n\n");
         while (getchar() != '\n')
             ;
         return;
     }
 
-    system("clear");
-
     if (search_option == 0)
     {
+        clean_terminal();
         fprintf(stdout, "\nVolviendo al menú principal...\n\n");
         return;
     }
 
+    clean_terminal();
+
     Inventory *dbs[] = {first_inv, second_inv, third_inv, fourth_inv, fifth_inv};
     int sizes[] = {10000, 25000, 50000, 75000, 100000};
+    const char *plot_route = "sequentialsearch";
 
     if (search_option == 1)
     {
         fprintf(stdout, "\nIntroduce el ID a buscar: ");
         if (scanf("%d", &id_to_search) != 1)
         {
-            fprintf(stderr, "\nERROR entrada no válida.\n\n");
+            fprintf(stderr, "\nERROR entrada no válida. Por favor, introduce un número.\n\n");
             while (getchar() != '\n')
                 ;
             return;
@@ -56,16 +56,17 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
             end = clock();
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
-            fprintf(stdout, "Tiempo (BD %d): %.4f seg\n", sizes[i], time);
+            fprintf(stdout, "Tiempo de búsqueda Secuencial por ID (base de datos %d objetos): %.4f seg\n", sizes[i], time);
             if (results[i] != -1)
             {
                 Product *p = &dbs[i]->products[results[i]];
-                fprintf(stdout, "Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n", results[i], p->id, p->name, p->category, p->price, p->stock);
+                fprintf(stdout, "Datos del producto encontrado = POSICIÓN: %d - ID: %d - NOMBRE: %s - CATEGORÍA: %s - PRECIO: %.2f - STOCK: %d\n\n", results[i], p->id, p->name, p->category, p->price, p->stock);
             }
             else
                 fprintf(stdout, "Producto NO encontrado.\n\n");
         }
-        plot_search_times(sizes, times, 5, "Búsqueda Secuencial por ID", "Search ID");
+        fprintf(stdout, "Búsqueda Secuencial Search por ID completado. Su gráfico quedó guardado en 'plots'.");
+        plot_test_times(sizes, times, 5, "Búsqueda Secuencial por ID", plot_route, "Search ID");
     }
     else if (search_option == 2)
     {
@@ -74,38 +75,39 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
             ;
         if (fgets(name_to_search, MAX_NAME_LENGTH, stdin) == NULL)
         {
-            fprintf(stderr, "\nERROR al leer el nombre.\n");
+            fprintf(stderr, "\nERROR entrada no válida. Por favor introduce una cadena de caracteres.\n");
             return;
         }
         fprintf(stdout, "\n");
 
+        // Eliminar el salto de línea al final de la cadena
         size_t len = strlen(name_to_search);
         if (len > 0 && name_to_search[len - 1] == '\n')
             name_to_search[len - 1] = '\0';
 
         for (int i = 0; i < 5; i++)
         {
-            int pos;
             start = clock();
-            pos = sequential_search_by_name(dbs[i], name_to_search);
+            int pos = sequential_search_by_name(dbs[i], name_to_search);
             end = clock();
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
-
-            fprintf(stdout, "BD %d → Tiempo: %.4f seg\n", sizes[i], time);
+            fprintf(stdout, "Tiempo de búsqueda Secuencial por Nombre (base de datos de %d objetos): %.4f segundos.\n", sizes[i], time);
             if (pos != -1)
             {
                 Product *p = &dbs[i]->products[pos];
-                fprintf(stdout, "Producto en pos %d: ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n\n", pos, p->id, p->name, p->category, p->price, p->stock);
+                fprintf(stdout, "Datos del producto encontrado = POS: %d - ID: %d - NOMBRE: %s - CATEGORIA: %s - PRECIO: %.2f - STOCK: %d\n\n", pos, p->id, p->name, p->category, p->price, p->stock);
             }
             else
                 fprintf(stdout, "Producto NO encontrado.\n\n");
         }
-        plot_search_times(sizes, times, 5, "Búsqueda Secuencial por Nombre", "Search Name");
+        fprintf(stdout, "Búsqueda Secuencial Search por Nombre completado. Su gráfico quedó guardado en 'plots'.");
+        plot_test_times(sizes, times, 5, "Búsqueda Secuencial por Nombre", plot_route, "Search Name");
     }
     else if (search_option == 3)
     {
         double min_price, max_price;
+
         fprintf(stdout, "\nIntroduce el precio mínimo: ");
         if (scanf("%lf", &min_price) != 1)
         {
@@ -125,24 +127,24 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
         {
             Product *results[50];
             start = clock();
-            int found = sequential_search_by_price_range(dbs[i], min_price, max_price, results, 10);
+            int pos = sequential_search_by_price_range(dbs[i], min_price, max_price, results, 10);
             end = clock();
             time = (double)(end - start) / CLOCKS_PER_SEC;
             times[i] = time;
-            fprintf(stdout, "Base de datos de %d → %d resultados en %.4f seg:\n", sizes[i], found, time);
-            if (found == 0)
+            fprintf(stdout, "Tiempo de búsqueda Secuencial por Rango de Precios (base de datos de %d objetos): %.4f segundos.\n", sizes[i], time);
+            if (pos == 0)
                 fprintf(stdout, "\nNo hay productos en ese rango.\n");
             else
             {
-                for (int j = 0; j < found; j++)
+                for (int j = 0; j < pos; j++)
                 {
                     Product *p = results[j];
-                    fprintf(stdout, "ID: %d, Nombre: %s, Categoría: %s, Precio: %.2f, Stock: %d\n", p->id, p->name, p->category, p->price, p->stock);
+                    fprintf(stdout, "Datos del producto encontrado = POS: %d - ID: %d - NOMBRE: %s - CATEGORIA: %s - PRECIO: %.2f - STOCK: %d\n\n", pos, p->id, p->name, p->category, p->price, p->stock);
                 }
-                fprintf(stdout, "\n");
             }
         }
-        plot_search_times(sizes, times, 5, "Búsqueda Secuencial por Precio", "Search Price");
+        fprintf(stdout, "Búsqueda Secuencial Search por Rango de Precios completado. Su gráfico quedó guardado en 'plots'.");
+        plot_test_times(sizes, times, 5, "Búsqueda Secuencial por Rango de Precios", plot_route, "Search Price Range");
     }
     else
     {

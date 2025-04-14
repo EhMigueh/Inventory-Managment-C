@@ -7,7 +7,7 @@ void handle_comparative_sort(Inventory *first_inv, Inventory *second_inv, Invent
     double time;
     double bubble_times[5], insertion_times[5], selection_times[5];
 
-    system("clear");
+    clean_terminal();
 
     print_menu_sort();
 
@@ -15,7 +15,7 @@ void handle_comparative_sort(Inventory *first_inv, Inventory *second_inv, Invent
     fprintf(stdout, "\nSelecciona una opción: ");
     if (scanf("%d", &search_option) != 1)
     {
-        system("clear");
+        clean_terminal();
         fprintf(stderr, "\nERROR entrada no válida. Por favor, introduce un número.\n\n");
         while (getchar() != '\n')
             ;
@@ -24,7 +24,7 @@ void handle_comparative_sort(Inventory *first_inv, Inventory *second_inv, Invent
 
     if (search_option == 0)
     {
-        system("clear");
+        clean_terminal();
         fprintf(stdout, "Volviendo al menú principal...\n\n");
         return;
     }
@@ -33,15 +33,17 @@ void handle_comparative_sort(Inventory *first_inv, Inventory *second_inv, Invent
     void (*selection_sort_functions[])(Inventory *) = {selection_sort_by_price, selection_sort_by_stock, selection_sort_by_id, selection_sort_by_name};
     void (*insertion_sort_functions[])(Inventory *) = {insertion_sort_by_price, insertion_sort_by_stock, insertion_sort_by_id, insertion_sort_by_name};
     const char *labels[] = {"precio", "stock", "ID", "nombre"};
+    const char *plot_route = "comparatives";
+    const char *plot_title = "Comparative Sort";
 
     if (search_option < 1 || search_option > 4)
     {
-        system("clear");
+        clean_terminal();
         fprintf(stderr, "ERROR opción inválida. Solo se permite 0, 1, 2, 3 o 4.\n\n");
         return;
     }
 
-    system("clear");
+    clean_terminal();
 
     Inventory *dbs[] = {first_inv, second_inv, third_inv, fourth_inv, fifth_inv};
     int sizes[] = {10000, 25000, 50000, 75000, 100000};
@@ -91,5 +93,5 @@ void handle_comparative_sort(Inventory *first_inv, Inventory *second_inv, Invent
     load_all_inventories(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
 
     fprintf(stdout, "Ordenamiento (Bubble Sort, Selection Sort e Insertion Sort) por %s completado. Sus gráficos quedaron guardados en 'plots'.", labels[index]);
-    plot_comparative_sort_times(sizes, bubble_times, selection_times, insertion_times, 5, labels[index]);
+    plot_comparative_sort_times(sizes, bubble_times, selection_times, insertion_times, 5, labels[index], plot_route, plot_title);
 }
