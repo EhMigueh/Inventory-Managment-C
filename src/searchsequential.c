@@ -28,8 +28,6 @@ int sequential_search_by_price_range(Inventory *inventory, double min_price, dou
     // Número de iteraciones para tener mediciones más precisas
     const int NUM_ITERATIONS = 1000;
     struct timespec start, end;
-    double total_time = 0.0;
-
     // Forzar recorrido completo del inventario siempre
     int found_items = 0;
 
@@ -55,11 +53,6 @@ int sequential_search_by_price_range(Inventory *inventory, double min_price, dou
 
     clock_gettime(CLOCK_MONOTONIC, &end);
 
-    total_time = ((end.tv_sec - start.tv_sec) * 1e9 + (end.tv_nsec - start.tv_nsec)) / 1e9;
-    double avg_time = total_time / NUM_ITERATIONS;
-
-    printf("Tiempo promedio: %.9f segundos\n", avg_time);
-    printf("Total elementos encontrados: %d\n", count);
 
     return (count < max_results) ? count : max_results;
 }

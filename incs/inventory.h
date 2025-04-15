@@ -82,11 +82,19 @@ void handle_binary_search(Inventory *, Inventory *, Inventory *, Inventory *, In
 int binary_search_by_id(Inventory *, int);
 int binary_search_by_name(Inventory *, const char *);
 int binary_search_by_price_range(Inventory *, double, double, Product **, int);
+int binary_search_lower_bound_price(Inventory *inv, double min_price);
+int binary_search_upper_bound_price(Inventory *inv, double max_price);
 
-// Algoritmo Busqueda Binaria Optimizada (Recursiva)
+// Algoritmo Busqueda Binaria (Recursiva)
 int binary_search_by_id_recursive(Inventory *, int, int, int);
 int binary_search_by_name_recursive(Inventory *, const char *, int, int);
 int binary_search_by_price_range_recursive(Inventory *, double, double, Product **, int);
 
+int find_lower_bound_recursive(Inventory *inv, double min_price, int left, int right);
+int find_upper_bound_recursive(Inventory *inv, double max_price, int left, int right);
+
 // Alogritmo Comparativo de Ordenamiento
 void handle_comparative_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
+void plot_comparative_search_times(int sizes[], double seq_times[], double bin_iter_times[], double bin_rec_times[], 
+int count, const char *title, const char *route, const char *filename);
+void handle_comparative_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);

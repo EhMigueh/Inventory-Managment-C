@@ -64,6 +64,7 @@ int main(void)
             handle_comparative_sort(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             break;
         case 7:
+            handle_comparative_search(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             fprintf(stdout, "\nComparativa de BÚSQUEDA (en progreso).\n\n");
             break;
         case 0:

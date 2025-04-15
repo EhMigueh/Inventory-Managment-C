@@ -133,7 +133,6 @@ int binary_search_by_price_range(Inventory *inventory, double min_price, double 
 
     const int NUM_ITERATIONS = 1000;
     struct timespec start, end;
-    double total_time = 0.0;
 
     // límites del rango de precios
     int lower_bound, upper_bound;
@@ -170,17 +169,13 @@ int binary_search_by_price_range(Inventory *inventory, double min_price, double 
 
     clock_gettime(CLOCK_MONOTONIC, &end);
 
-    total_time = ((end.tv_sec - start.tv_sec) * 1e9 + (end.tv_nsec - start.tv_nsec)) / 1e9;
-    double avg_time = total_time / NUM_ITERATIONS;
 
-    printf("Tiempo promedio: %.9f segundos\n", avg_time);
-    printf("Total elementos encontrados: %d (mostrando máximo %d)\n", count, max_results);
 
     return (count < max_results) ? count : max_results;
 }
 
 // Funciones auxiliares para búsqueda recursiva por rango de precios
-static int find_lower_bound_recursive(Inventory *inv, double min_price, int left, int right)
+int find_lower_bound_recursive(Inventory *inv, double min_price, int left, int right)
 {
     if (left > right)
         return -1;
@@ -189,14 +184,16 @@ static int find_lower_bound_recursive(Inventory *inv, double min_price, int left
 
     if (inv->products[mid].price >= min_price)
     {
-        int pos = find_lower_bound_recursive(inv, min_price, left, mid - 1);
-        return (pos != -1) ? pos : mid;
+        int res = find_lower_bound_recursive(inv, min_price, left, mid - 1);
+        return (res != -1) ? res : mid;
     }
     else
+    {
         return find_lower_bound_recursive(inv, min_price, mid + 1, right);
+    }
 }
 
-static int find_upper_bound_recursive(Inventory *inv, double max_price, int left, int right)
+int find_upper_bound_recursive(Inventory *inv, double max_price, int left, int right)
 {
     if (left > right)
         return -1;
@@ -205,12 +202,15 @@ static int find_upper_bound_recursive(Inventory *inv, double max_price, int left
 
     if (inv->products[mid].price <= max_price)
     {
-        int pos = find_upper_bound_recursive(inv, max_price, mid + 1, right);
-        return (pos != -1) ? pos : mid;
+        int res = find_upper_bound_recursive(inv, max_price, mid + 1, right);
+        return (res != -1) ? res : mid;
     }
     else
+    {
         return find_upper_bound_recursive(inv, max_price, left, mid - 1);
+    }
 }
+
 
 // Búsqueda binaria por rango de precios recursiva
 int binary_search_by_price_range_recursive(Inventory *inventory, double min_price, double max_price, Product **results, int max_results)
@@ -220,7 +220,6 @@ int binary_search_by_price_range_recursive(Inventory *inventory, double min_pric
 
     const int NUM_ITERATIONS = 1000;
     struct timespec start, end;
-    double total_time = 0.0;
 
     clock_gettime(CLOCK_MONOTONIC, &start);
 
@@ -232,13 +231,13 @@ int binary_search_by_price_range_recursive(Inventory *inventory, double min_pric
         int lower_bound = find_lower_bound_recursive(inventory, min_price, 0, inventory->count - 1);
 
         if (lower_bound == -1)
-            continue; // No hay productos con precio >= min_price
+            continue; 
 
         // Encuentra índice del último producto con precio <= max_price
         int upper_bound = find_upper_bound_recursive(inventory, max_price, 0, inventory->count - 1);
 
         if (upper_bound == -1 || upper_bound < lower_bound)
-            continue; // No hay productos con precio <= max_price o el rango esta vacio
+            continue; 
 
         // Cuenta y almacena los productos en el rango
         count = upper_bound - lower_bound + 1;
@@ -254,11 +253,6 @@ int binary_search_by_price_range_recursive(Inventory *inventory, double min_pric
 
     clock_gettime(CLOCK_MONOTONIC, &end);
 
-    total_time = ((end.tv_sec - start.tv_sec) * 1e9 + (end.tv_nsec - start.tv_nsec)) / 1e9;
-    double avg_time = total_time / NUM_ITERATIONS;
-
-    printf("Tiempo promedio: %.9f segundos\n", avg_time);
-    printf("Total elementos encontrados: %d (mostrando máximo %d)\n", count, max_results);
 
     return (count < max_results) ? count : max_results;
 }
