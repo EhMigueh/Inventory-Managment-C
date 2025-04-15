@@ -7,10 +7,10 @@ void print_menu()
     fprintf(stdout, "1. Realizar pruebas de ordenamiento BUBBLE SORT.\n");
     fprintf(stdout, "2. Realizar pruebas de ordenamiento SELECTION SORT.\n");
     fprintf(stdout, "3. Realizar pruebas de ordenamiento INSERTION SORT.\n");
-    fprintf(stdout, "4. Realizar pruebas de búsqueda SECUENCIAL (EN PROGRESO).\n");
-    fprintf(stdout, "5. Realizar pruebas de búsqueda BINARIA (EN PROGRESO).\n");
+    fprintf(stdout, "4. Realizar pruebas de búsqueda SECUENCIAL.\n");
+    fprintf(stdout, "5. Realizar pruebas de búsqueda BINARIA.\n");
     fprintf(stdout, "6. Realizar COMPARATIVA ORDENAMIENTO.\n");
-    fprintf(stdout, "7. Realizar COMPARATIVA BUSQUEDA (EN PROGRESO).\n");
+    fprintf(stdout, "7. Realizar COMPARATIVA BUSQUEDA.\n");
     fprintf(stdout, "0. Salir.");
 }
 
@@ -51,57 +51,61 @@ void clean_terminal()
 }
 
 // Función para graficar los tiempos de ordenamiento.
-void plot_test_times(int *sizes, double *times, int n, const char *title, const char *plot_route, const char *filename) 
+void plot_test_times(int *sizes, double *times, int n, const char *title, const char *plot_route, const char *filename)
 {
     gnuplot_ctrl *gp = gnuplot_init();
-    
+
     // Determinar el valor mínimo y máximo para ajustar la escala
     double min_time = times[0];
     double max_time = times[0];
-    for (int i = 1; i < n; i++) {
-        if (times[i] < min_time) min_time = times[i];
-        if (times[i] > max_time) max_time = times[i];
+    for (int i = 1; i < n; i++)
+    {
+        if (times[i] < min_time)
+            min_time = times[i];
+        if (times[i] > max_time)
+            max_time = times[i];
     }
-    
+
     // Convertir a nanosegundos para tiempos muy pequeños
-    double scale_factor = 1e9;  //  nanosegundos
+    double scale_factor = 1e9; //  nanosegundos
     char *time_unit = "ns";
-    
+
     double scaled_times[n];
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         scaled_times[i] = times[i] * scale_factor;
     }
-    
+
     gnuplot_setstyle(gp, "linespoints");
     gnuplot_cmd(gp, "set title '%s'", title);
     gnuplot_cmd(gp, "set xlabel 'Cantidad de productos'");
     gnuplot_cmd(gp, "set ylabel 'Tiempo (%s)'", time_unit);
-    
+
     // Forzar un rango específico para el eje Y con un margen del 10%
-    double y_min = 0.9 * scaled_times[0];  // 10% menos que el mínimo
-    double y_max = 1.1 * scaled_times[n-1];  // 10% más que el máximo
-    
+    double y_min = 0.9 * scaled_times[0];     // 10% menos que el mínimo
+    double y_max = 1.1 * scaled_times[n - 1]; // 10% más que el máximo
+
     // Asegurar que el rango nunca sea vacío o demasiado pequeño
-    if (y_max - y_min < 1.0) {
+    if (y_max - y_min < 1.0)
+    {
         y_min = scaled_times[0] - 1.0;
-        y_max = scaled_times[n-1] + 1.0;
+        y_max = scaled_times[n - 1] + 1.0;
     }
-    
+
     gnuplot_cmd(gp, "set yrange [%f:%f]", y_min, y_max);
     gnuplot_cmd(gp, "set term png");
     gnuplot_cmd(gp, "set output 'plots/%s/%s.png'", plot_route, filename);
-    
+
     double *sizes_double = (double *)malloc(n * sizeof(double));
     for (int i = 0; i < n; ++i)
         sizes_double[i] = (double)sizes[i];
-    
+
     // Usar los tiempos escalados en lugar de los originales
     gnuplot_plot_xy(gp, sizes_double, scaled_times, n, title);
-    
+
     free(sizes_double);
     gnuplot_close(gp);
 }
-
 
 // Función para graficar los tiempos de búsqueda (REVISAR).
 void plot_search_times(int *sizes, double *times, int n, const char *title, const char *label)
@@ -169,16 +173,14 @@ void plot_comparative_sort_times(int *sizes, double *bubble_times, double *selec
     pclose(gnuplot);
 }
 
-
 // Función para graficar tres series de tiempos comparativos
-void plot_comparative_search_times(int sizes[], double seq_times[], double bin_iter_times[], double bin_rec_times[],
-    int count, const char *label, const char *plot_route, const char *plot_title)
+void plot_comparative_search_times(int sizes[], double seq_times[], double bin_iter_times[], double bin_rec_times[], int count, const char *label, const char *plot_route, const char *plot_title)
 {
     FILE *gnuplot = popen("gnuplot -persistent", "w");
     if (!gnuplot)
     {
-    fprintf(stderr, "Error al abrir Gnuplot.\n");
-    return;
+        fprintf(stderr, "Error al abrir Gnuplot.\n");
+        return;
     }
 
     char output_filename[256];
@@ -193,22 +195,22 @@ void plot_comparative_search_times(int sizes[], double seq_times[], double bin_i
     fprintf(gnuplot, "set grid\n");
     fprintf(gnuplot, "set key outside right top\n");
     fprintf(gnuplot, "plot '-' using 1:2 with linespoints title 'Secuencial', "
-        "'-' using 1:2 with linespoints title 'Binaria Iterativa', "
-        "'-' using 1:2 with linespoints title 'Binaria Recursiva'\n");
+                     "'-' using 1:2 with linespoints title 'Binaria Iterativa', "
+                     "'-' using 1:2 with linespoints title 'Binaria Recursiva'\n");
 
     //  Secuencial
     for (int i = 0; i < count; i++)
-    fprintf(gnuplot, "%d %.9f\n", sizes[i], seq_times[i]);
+        fprintf(gnuplot, "%d %.9f\n", sizes[i], seq_times[i]);
     fprintf(gnuplot, "e\n");
 
     //  Binaria Iterativa
     for (int i = 0; i < count; i++)
-    fprintf(gnuplot, "%d %.9f\n", sizes[i], bin_iter_times[i]);
+        fprintf(gnuplot, "%d %.9f\n", sizes[i], bin_iter_times[i]);
     fprintf(gnuplot, "e\n");
 
     //  Binaria Recursiva
     for (int i = 0; i < count; i++)
-    fprintf(gnuplot, "%d %.9f\n", sizes[i], bin_rec_times[i]);
+        fprintf(gnuplot, "%d %.9f\n", sizes[i], bin_rec_times[i]);
     fprintf(gnuplot, "e\n");
 
     pclose(gnuplot);
