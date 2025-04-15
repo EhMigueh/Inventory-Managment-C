@@ -59,7 +59,7 @@ int sequential_search_by_price_range(Inventory *inventory, double min_price, dou
     double avg_time = total_time / NUM_ITERATIONS;
 
     printf("Tiempo promedio: %.9f segundos\n", avg_time);
-    printf("Total elementos encontrados: %d (mostrando máximo %d)\n", count, max_results);
+    printf("Total elementos encontrados: %d\n", count);
 
     return (count < max_results) ? count : max_results;
 }
