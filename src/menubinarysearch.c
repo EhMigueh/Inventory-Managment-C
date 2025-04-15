@@ -32,11 +32,6 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
         return;
     }
 
-    if (search_option == 4)
-    {
-       // quitar
-        return;
-    }
 
     fprintf(stdout, "\n¿Deseas usar la versión recursiva (1) o iterativa (0)? ");
     if (scanf("%d", &use_recursive) != 1 || (use_recursive != 0 && use_recursive != 1))
@@ -96,10 +91,9 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
     else if (search_option == 2) // Búsqueda por nombre
     {
         const char *names_to_search[10] = {
-            "Laptop", "Televisor", "Smartphone", "Auriculares", "Tablet",
-            "Impresora", "Monitor", "Teclado", "Mouse", "Cámara"
-        };
-
+            "Laptop", "Televiso", "Smartfon", "Auricular", "Tablet",
+            "Impresora", "Monitor", "Teclado", "Mouse", "Cámara"};
+            
         fprintf(stdout, "\nBuscando 10 nombres de productos comunes:\n");
         for (int i = 0; i < 10; i++)
             fprintf(stdout, "Nombre #%d a buscar: %s\n", i + 1, names_to_search[i]);

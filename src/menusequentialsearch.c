@@ -77,7 +77,7 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
     {
         // 10 nombres para buscar
         const char *names_to_search[10] = {
-            "Laptop", "Televisor", "Smartphone", "Auriculares", "Tablet",
+            "Laptop", "Televiso", "Smartfon", "Auricular", "Tablet",
             "Impresora", "Monitor", "Teclado", "Mouse", "Cámara"};
 
         fprintf(stdout, "\nBuscando 10 nombres de productos comunes:\n\n");

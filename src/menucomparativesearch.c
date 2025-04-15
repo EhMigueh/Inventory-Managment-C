@@ -51,9 +51,8 @@ void handle_comparative_search(Inventory *first_inv, Inventory *second_inv, Inve
     {
         int ids_to_search[10];
         const char *names_to_search[10] = {
-            "Laptop", "Televisor", "Smartphone", "Auriculares", "Tablet",
-            "Impresora", "Monitor", "Teclado", "Mouse", "Cámara"
-        };
+            "Laptop", "Televiso", "Smartfon", "Auricular", "Tablet",
+            "Impresora", "Monitor", "Teclado", "Mouse", "Cámara"};
         
         if (search_option == 1)
         {
