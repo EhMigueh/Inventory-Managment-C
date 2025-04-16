@@ -61,6 +61,25 @@ void print_menu_metrics() {
     printf("╚══════════════════════════════════════════════════╝\n");
 }
 
+void print_product_in_table(Product *product) {
+    if (product != NULL) {
+        char price_formatted[50];
+        char stock_formatted[50];
+
+        format_with_commas(product->price, price_formatted);
+        format_with_commas((double)product->stock, stock_formatted);
+
+        // Imprimir el encabezado de la tabla
+        printf("  ➤ Producto: %s\n", product->name);
+        printf("╔════════════╦════════════╦══════════════╦════════════╦════════════╗\n");
+        printf("║   ID       ║  Nombre    ║  Categoría   ║  Precio    ║  Stock     ║\n");
+        printf("╠════════════╬════════════╬══════════════╬════════════╬════════════╣\n");
+        printf("║ %-10d ║ %-10s ║ %-12s ║ $%-10s║ %-10s ║\n", 
+               product->id, product->name, product->category, price_formatted, stock_formatted);
+        printf("╚════════════╩════════════╩══════════════╩════════════╩════════════╝\n");
+    }
+}
+
 // Imprime los resultados de las pruebas de ordenamiento.
 void print_stats(Inventory *inv, int size)
 {
@@ -77,93 +96,61 @@ void clean_terminal()
 }
 
 // Función para graficar los tiempos de ordenamiento.
-void plot_test_times(int *sizes, double *times, int n, const char *title, const char *plot_route, const char *filename)
+void plot_test_times(int *sizes, double *times, int n, const char *title, const char *plot_route, const char *filename, int is_search)
 {
     gnuplot_ctrl *gp = gnuplot_init();
 
-    // Determinar el valor mínimo y máximo para ajustar la escala
-    double min_time = times[0];
-    double max_time = times[0];
-    for (int i = 1; i < n; i++)
+    // Determinar escala según el tipo de algoritmo
+    double scale_factor;
+    const char *time_unit;
+
+    if (is_search)
     {
-        if (times[i] < min_time)
-            min_time = times[i];
-        if (times[i] > max_time)
-            max_time = times[i];
+        scale_factor = 1e9; // nanosegundos
+        time_unit = "ns";
+    }
+    else
+    {
+        scale_factor = 1.0; // segundos
+        time_unit = "s";
     }
 
-    // Convertir a nanosegundos para tiempos muy pequeños
-    double scale_factor = 1e9; //  nanosegundos
-    char *time_unit = "ns";
-
+    // Escalar los tiempos
     double scaled_times[n];
     for (int i = 0; i < n; i++)
-    {
         scaled_times[i] = times[i] * scale_factor;
-    }
 
+    // Convertir sizes a double
+    double *sizes_double = (double *)malloc(n * sizeof(double));
+    for (int i = 0; i < n; i++)
+        sizes_double[i] = (double)sizes[i];
+
+    // Definir estilo y etiquetas
     gnuplot_setstyle(gp, "linespoints");
     gnuplot_cmd(gp, "set title '%s'", title);
     gnuplot_cmd(gp, "set xlabel 'Cantidad de productos'");
     gnuplot_cmd(gp, "set ylabel 'Tiempo (%s)'", time_unit);
 
-    // Forzar un rango específico para el eje Y con un margen del 10%
-    double y_min = 0.9 * scaled_times[0];     // 10% menos que el mínimo
-    double y_max = 1.1 * scaled_times[n - 1]; // 10% más que el máximo
-
-    // Asegurar que el rango nunca sea vacío o demasiado pequeño
+    // Rango dinámico con margen
+    double y_min = 0.9 * scaled_times[0];
+    double y_max = 1.1 * scaled_times[n - 1];
     if (y_max - y_min < 1.0)
     {
         y_min = scaled_times[0] - 1.0;
         y_max = scaled_times[n - 1] + 1.0;
     }
-
     gnuplot_cmd(gp, "set yrange [%f:%f]", y_min, y_max);
+
+    // Configurar salida
     gnuplot_cmd(gp, "set term png");
     gnuplot_cmd(gp, "set output 'plots/%s/%s.png'", plot_route, filename);
 
-    double *sizes_double = (double *)malloc(n * sizeof(double));
-    for (int i = 0; i < n; ++i)
-        sizes_double[i] = (double)sizes[i];
-
-    // Usar los tiempos escalados en lugar de los originales
+    // Graficar
     gnuplot_plot_xy(gp, sizes_double, scaled_times, n, title);
 
     free(sizes_double);
     gnuplot_close(gp);
 }
-
-
-void plot_sort_times_seconds(int *sizes, double *times, int n, const char *algorithm_name, const char *plot_route, const char *filename)
-{
-    gnuplot_ctrl *gp = gnuplot_init();
-
-    if (gp == NULL)
-    {
-        fprintf(stderr, "Error al iniciar gnuplot.\n");
-        return;
-    }
-
-    double *sizes_double = (double *)malloc(n * sizeof(double));
-    for (int i = 0; i < n; ++i)
-        sizes_double[i] = (double)sizes[i];
-
-    gnuplot_setstyle(gp, "linespoints");
-
-    gnuplot_cmd(gp, "set title 'Tiempo de ejecución - %s'", algorithm_name);
-    gnuplot_cmd(gp, "set xlabel 'Cantidad de elementos'");
-    gnuplot_cmd(gp, "set ylabel 'Tiempo (segundos)'");
-
-    gnuplot_cmd(gp, "set grid");
-    gnuplot_cmd(gp, "set term png");
-    gnuplot_cmd(gp, "set output 'plots/%s/%s.png'", plot_route, filename);
-
-    gnuplot_plot_xy(gp, sizes_double, times, n, algorithm_name);
-
-    free(sizes_double);
-    gnuplot_close(gp);
-}
-
 
 
 // Función para graficar los tiempos de búsqueda (REVISAR).
@@ -273,4 +260,36 @@ void plot_comparative_search_times(int sizes[], double seq_times[], double bin_i
     fprintf(gnuplot, "e\n");
 
     pclose(gnuplot);
+}
+
+// Función auxiliar para formatear números con comas
+void format_with_commas(double number, char *output) {
+    char buffer[50];
+    sprintf(buffer, "%.2f", number);
+
+    char *dot = strchr(buffer, '.');
+    int int_len = dot - buffer;
+    int commas = (int_len - 1) / 3;
+
+    int new_len = int_len + commas;
+    int total_len = new_len + strlen(dot);
+
+    int i = int_len - 1;
+    int j = new_len - 1;
+    int digit_count = 0;
+
+    output[total_len] = '\0';
+
+    // Copiar parte decimal
+    for (int k = strlen(dot) - 1; k >= 0; k--)
+        output[new_len + k] = dot[k];
+
+    while (i >= 0) {
+        output[j--] = buffer[i--];
+        digit_count++;
+        if (digit_count == 3 && i >= 0) {
+            output[j--] = ',';
+            digit_count = 0;
+        }
+    }
 }

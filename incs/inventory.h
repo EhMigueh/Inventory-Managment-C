@@ -45,10 +45,9 @@ void print_menu_search();
 void print_menu_metrics();
 void print_stats(Inventory *, int);
 void clean_terminal();
-void plot_test_times(int *, double *, int, const char *, const char *, const char *);
+void plot_test_times(int *, double *, int, const char *, const char *, const char *, int);
 void plot_comparative_sort_times(int *, double *, double *, double *, int, const char *, const char *, const char *);
 void plot_comparative_search_times(int *, double *, double *, double *, int, const char *, const char *, const char *);
-void plot_sort_times_seconds(int *sizes, double *times, int n, const char *algorithm_name, const char *plot_route, const char *filename);
 // Funciones de Error.
 void save_sorted_inventory(Inventory *, const char *);
 

@@ -78,7 +78,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
 
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por ID (10 búsquedas)" : "Búsqueda Binaria Iterativa por ID (10 búsquedas)";
         const char *plot_filename = use_recursive ? "Binary_Recursive_ID_10" : "Binary_Iterative_ID_10";
-        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename);
+        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
         fprintf(stdout, "\nBúsqueda binaria por ID completada. Su gráfico quedó guardado en 'plots'.");
     }
     else if (search_option == 2) // Búsqueda por nombre
@@ -120,7 +120,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
 
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Nombre (10 búsquedas)" : "Búsqueda Binaria Iterativa por Nombre (10 búsquedas)";
         const char *plot_filename = use_recursive ? "Binary_Recursive_Name_10" : "Binary_Iterative_Name_10";
-        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename);
+        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
         fprintf(stdout, "\nBúsqueda binaria por nombre completada. Su gráfico quedó guardado en 'plots'.");
     }
     else if (search_option == 3) // Búsqueda por rango de precios
@@ -162,7 +162,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
 
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Rango de Precios (10 búsquedas)" : "Búsqueda Binaria Iterativa por Rango de Precios (10 búsquedas)";
         const char *plot_filename = use_recursive ? "Binary_Recursive_Price_10" : "Binary_Iterative_Price_10";
-        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename);
+        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
         fprintf(stdout, "\nBúsqueda binaria por rango de precios completada. Su gráfico quedó guardado en 'plots'.");
     }
 }

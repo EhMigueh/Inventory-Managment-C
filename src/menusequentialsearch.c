@@ -69,7 +69,7 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
         // Generar gráfico para búsqueda secuencial por ID
         const char *plot_title = "Búsqueda Secuencial por ID (10 búsquedas)";
         const char *plot_filename = "Sequential ID 10";
-        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename);
+        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
 
         fprintf(stdout, "\nBúsqueda Sequential Search por ID completada. Su gráfico quedó guardado en 'plots'.");
     }
@@ -106,7 +106,7 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
         // Generar gráfico para búsqueda secuencial por nombre
         const char *plot_title = "Búsqueda Secuencial por Nombre (10 búsquedas)";
         const char *plot_filename = "Sequential Name 10";
-        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename);
+        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
 
         fprintf(stdout, "\nBúsqueda Sequential Search por nombre completada. Su gráfico quedó guardado en 'plots'.");
     }
@@ -143,7 +143,7 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
         // Gráfico para búsqueda secuencial por rango de precios
         const char *plot_title = "Búsqueda Secuencial por Rangos de Precios (10 rangos)";
         const char *plot_filename = "Sequential Price Range 10";
-        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename);
+        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
 
         fprintf(stdout, "Búsqueda Sequential Search por rango de precios completada. Su gráfico quedó guardado en 'plots'.");
     }
