@@ -21,7 +21,7 @@ int main(void)
     fprintf(stdout, "Segunda base de datos cargada con %d productos.\n", second_inv->count);
     fprintf(stdout, "Tercera base de datos cargada con %d productos.\n", third_inv->count);
     fprintf(stdout, "Cuarta base de datos cargada con %d productos.\n", fourth_inv->count);
-    fprintf(stdout, "Quinta base de datos cargada con %d productos.", fifth_inv->count);
+    fprintf(stdout, "Quinta base de datos cargada con %d productos.\n", fifth_inv->count);
 
     int option;
     while (1)
