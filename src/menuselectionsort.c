@@ -60,5 +60,5 @@ void handle_selection_sort(Inventory *first_inv, Inventory *second_inv, Inventor
     }
 
     fprintf(stdout, "Ordenamiento Selection Sort por %s completado. Su gráfico quedó guardado en 'plots'.", labels[index]);
-    plot_test_times(sizes, times, 5, plot_titles[index], plot_route, plot_filenames[index]);
+    plot_sort_times_seconds(sizes, times, 5, plot_titles[index], plot_route, plot_filenames[index]);
 }

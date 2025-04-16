@@ -133,6 +133,39 @@ void plot_test_times(int *sizes, double *times, int n, const char *title, const 
     gnuplot_close(gp);
 }
 
+
+void plot_sort_times_seconds(int *sizes, double *times, int n, const char *algorithm_name, const char *plot_route, const char *filename)
+{
+    gnuplot_ctrl *gp = gnuplot_init();
+
+    if (gp == NULL)
+    {
+        fprintf(stderr, "Error al iniciar gnuplot.\n");
+        return;
+    }
+
+    double *sizes_double = (double *)malloc(n * sizeof(double));
+    for (int i = 0; i < n; ++i)
+        sizes_double[i] = (double)sizes[i];
+
+    gnuplot_setstyle(gp, "linespoints");
+
+    gnuplot_cmd(gp, "set title 'Tiempo de ejecución - %s'", algorithm_name);
+    gnuplot_cmd(gp, "set xlabel 'Cantidad de elementos'");
+    gnuplot_cmd(gp, "set ylabel 'Tiempo (segundos)'");
+
+    gnuplot_cmd(gp, "set grid");
+    gnuplot_cmd(gp, "set term png");
+    gnuplot_cmd(gp, "set output 'plots/%s/%s.png'", plot_route, filename);
+
+    gnuplot_plot_xy(gp, sizes_double, times, n, algorithm_name);
+
+    free(sizes_double);
+    gnuplot_close(gp);
+}
+
+
+
 // Función para graficar los tiempos de búsqueda (REVISAR).
 void plot_search_times(int *sizes, double *times, int n, const char *title, const char *label)
 {
