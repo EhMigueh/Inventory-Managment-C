@@ -42,6 +42,7 @@ void load_all_inventories(Inventory *, Inventory *, Inventory *, Inventory *, In
 void print_menu();
 void print_menu_sort();
 void print_menu_search();
+void print_menu_metrics();
 void print_stats(Inventory *, int);
 void clean_terminal();
 void plot_test_times(int *, double *, int, const char *, const char *, const char *);
@@ -97,3 +98,14 @@ int find_upper_bound_recursive(Inventory *inv, double max_price, int left, int r
 // Alogritmo Comparativo de Ordenamiento
 void handle_comparative_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
 void handle_comparative_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
+
+// Funciones de Métricas
+void handle_inventory_metrics(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
+int get_total_products(Inventory *);
+double get_total_inventory_value(Inventory *);
+Product *get_product_with_max_stock(Inventory *);
+Product *get_product_with_min_stock(Inventory *);
+Product *get_most_expensive_product(Inventory *);
+Product *get_cheapest_product(Inventory *);
+void print_product_in_table(Product *);
+void format_with_commas(double, char *);

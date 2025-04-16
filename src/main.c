@@ -67,6 +67,10 @@ int main(void)
             handle_comparative_search(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
             fprintf(stdout, "\nComparativa de BÚSQUEDA (en progreso).\n\n");
             break;
+        case 8:
+            handle_inventory_metrics(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
+            fprintf(stdout, "\nMétricas del inventario (en progreso).\n\n");
+            break;
         case 0:
             fprintf(stdout, "\nSaliendo del programa...\n\n");
             free_invs(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);

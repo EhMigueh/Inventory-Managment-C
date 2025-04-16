@@ -3,36 +3,62 @@
 // Imprime el menu del programa.
 void print_menu()
 {
-    fprintf(stdout, "\n\nSelecciona una opción:\n");
-    fprintf(stdout, "1. Realizar pruebas de ordenamiento BUBBLE SORT.\n");
-    fprintf(stdout, "2. Realizar pruebas de ordenamiento SELECTION SORT.\n");
-    fprintf(stdout, "3. Realizar pruebas de ordenamiento INSERTION SORT.\n");
-    fprintf(stdout, "4. Realizar pruebas de búsqueda SECUENCIAL.\n");
-    fprintf(stdout, "5. Realizar pruebas de búsqueda BINARIA.\n");
-    fprintf(stdout, "6. Realizar COMPARATIVA ORDENAMIENTO.\n");
-    fprintf(stdout, "7. Realizar COMPARATIVA BUSQUEDA.\n");
-    fprintf(stdout, "0. Salir.");
+    printf("\n╔════════════════════════════════════════════════════╗\n");
+    printf("║                 MENÚ PRINCIPAL                     ║\n");
+    printf("╠════════════════════════════════════════════════════╣\n");
+    printf("║ 1. Realizar pruebas de ordenamiento BUBBLE SORT    ║\n");
+    printf("║ 2. Realizar pruebas de ordenamiento SELECTION SORT ║\n");
+    printf("║ 3. Realizar pruebas de ordenamiento INSERTION SORT ║\n");
+    printf("║ 4. Realizar pruebas de búsqueda SECUENCIAL         ║\n");
+    printf("║ 5. Realizar pruebas de búsqueda BINARIA            ║\n");
+    printf("║ 6. Realizar COMPARATIVA ORDENAMIENTO               ║\n");
+    printf("║ 7. Realizar COMPARATIVA BÚSQUEDA                   ║\n");
+    printf("║ 8. Mostrar MÉTRICAS del inventario                 ║\n");
+    printf("║ 0. Salir                                           ║\n");
+    printf("╚════════════════════════════════════════════════════╝\n");
 }
+
 
 // Imprime el menu de ordenamiento.
 void print_menu_sort()
 {
-    fprintf(stdout, "\nSelecciona el tipo de ordenamiento:\n");
-    fprintf(stdout, "1. Ordenar por precio.\n");
-    fprintf(stdout, "2. Ordenar por stock.\n");
-    fprintf(stdout, "3. Ordenar por ID.\n");
-    fprintf(stdout, "4. Ordenar por nombre.\n");
-    fprintf(stdout, "0. Volver al menú principal.\n");
+    printf("\n╔══════════════════════════════════════════════════╗\n");
+    printf("║              MENÚ DE ORDENAMIENTO                ║\n");
+    printf("╠══════════════════════════════════════════════════╣\n");
+    printf("║ 1. Ordenar por precio                            ║\n");
+    printf("║ 2. Ordenar por stock                             ║\n");
+    printf("║ 3. Ordenar por ID                                ║\n");
+    printf("║ 4. Ordenar por nombre                            ║\n");
+    printf("║ 0. Volver al menú principal                      ║\n");
+    printf("╚══════════════════════════════════════════════════╝\n");
 }
+
 
 // Imprime el menu de búsqueda.
 void print_menu_search()
 {
-    fprintf(stdout, "\nSelecciona el tipo de búsqueda:\n");
-    fprintf(stdout, "1. Búsqueda por ID.\n");
-    fprintf(stdout, "2. Búsqueda por nombre exacto.\n");
-    fprintf(stdout, "3. Búsqueda por rango de precios.\n");
-    fprintf(stdout, "0. Volver al menú principal.\n");
+    printf("\n╔══════════════════════════════════════════════════╗\n");
+    printf("║                MENÚ DE BÚSQUEDA                  ║\n");
+    printf("╠══════════════════════════════════════════════════╣\n");
+    printf("║ 1. Búsqueda por ID                               ║\n");
+    printf("║ 2. Búsqueda por nombre exacto                    ║\n");
+    printf("║ 3. Búsqueda por rango de precios                 ║\n");
+    printf("║ 0. Volver al menú principal                      ║\n");
+    printf("╚══════════════════════════════════════════════════╝\n");
+}
+
+
+// Imprime el menu de métricas.
+void print_menu_metrics() {
+    printf("\n╔══════════════════════════════════════════════════╗\n");
+    printf("║            MENÚ DE MÉTRICAS DEL INVENTARIO       ║\n");
+    printf("╠══════════════════════════════════════════════════╣\n");
+    printf("║ 1. Total de productos                            ║\n");
+    printf("║ 2. Valor total del inventario                    ║\n");
+    printf("║ 3. Producto con mayor y menor stock              ║\n");
+    printf("║ 4. Producto más caro y más barato                ║\n");
+    printf("║ 0. Volver al menú anterior                       ║\n");
+    printf("╚══════════════════════════════════════════════════╝\n");
 }
 
 // Imprime los resultados de las pruebas de ordenamiento.
