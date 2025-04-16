@@ -10,12 +10,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
 
     clean_terminal();
 
-    fprintf(stdout, "\nSelecciona el tipo de búsqueda:\n");
-    fprintf(stdout, "1. Búsqueda binaria por ID.\n");
-    fprintf(stdout, "2. Búsqueda binaria por nombre.\n");
-    fprintf(stdout, "3. Búsqueda binaria por rango de precios.\n");
-    fprintf(stdout, "0. Volver al menú principal.\n");
-    fprintf(stdout, "\nSelecciona una opción: ");
+    print_menu_search();
 
     if (scanf("%d", &search_option) != 1)
     {
@@ -84,7 +79,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por ID (10 búsquedas)" : "Búsqueda Binaria Iterativa por ID (10 búsquedas)";
         const char *plot_filename = use_recursive ? "Binary_Recursive_ID_10" : "Binary_Iterative_ID_10";
         plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename);
-        fprintf(stdout, "Búsqueda binaria por ID completada. Su gráfico quedó guardado en 'plots'.\n\n");
+        fprintf(stdout, "\nBúsqueda binaria por ID completada. Su gráfico quedó guardado en 'plots'.");
     }
     else if (search_option == 2) // Búsqueda por nombre
     {
@@ -126,7 +121,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Nombre (10 búsquedas)" : "Búsqueda Binaria Iterativa por Nombre (10 búsquedas)";
         const char *plot_filename = use_recursive ? "Binary_Recursive_Name_10" : "Binary_Iterative_Name_10";
         plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename);
-        fprintf(stdout, "Búsqueda binaria por nombre completada. Su gráfico quedó guardado en 'plots'.\n\n");
+        fprintf(stdout, "\nBúsqueda binaria por nombre completada. Su gráfico quedó guardado en 'plots'.");
     }
     else if (search_option == 3) // Búsqueda por rango de precios
     {
