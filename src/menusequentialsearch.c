@@ -11,7 +11,7 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
    int search_option;
    clock_t start, end;
    double search_time;
-   double times[5];  // Almacena tiempos para cada tamaño de inventario
+   double times[5];  
 
    clean_terminal();
 
@@ -42,17 +42,28 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
    if (search_option == 1)
    {
        // Opción 1: Búsqueda secuencial por ID
-       int ids_to_search[10];
-       fprintf(stdout, "\nBuscando 10 IDs aleatorias:\n\n");
-
-       // Genera IDs aleatorios para buscar
-       srand((unsigned int)time(NULL));
-       for (int i = 0; i < 10; i++)
+       int num_ids;
+       fprintf(stdout, "Cuántos IDs deseas buscar: ");
+       if (scanf("%d", &num_ids) != 1)
        {
-           ids_to_search[i] = rand() % 10000 + 1;
-           fprintf(stdout, "ID #%d a buscar: %d\n", i + 1, ids_to_search[i]);
+           fprintf(stderr, "\nERROR entrada no válida.\n\n");
+           return;
        }
-       fprintf(stdout, "\n");
+
+       int *ids_to_search = (int *)malloc(num_ids * sizeof(int));
+
+       // Genera IDs aleatorios o pide al usuario que los ingrese
+       fprintf(stdout, "\nIngresa los IDs a buscar:\n");
+       for (int i = 0; i < num_ids; i++)
+       {
+           fprintf(stdout, "ID #%d: ", i + 1);
+           if (scanf("%d", &ids_to_search[i]) != 1)
+           {
+               fprintf(stderr, "\nERROR entrada no válida.\n\n");
+               free(ids_to_search);
+               return;
+           }
+       }
 
        // Realiza búsquedas en cada inventario
        for (int i = 0; i < 5; i++)
@@ -61,7 +72,7 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
            start = clock();  // Inicia temporizador
 
            // Busca cada ID y cuenta encontrados
-           for (int j = 0; j < 10; j++)
+           for (int j = 0; j < num_ids; j++)
            {
                int result = sequential_search_by_id(dbs[i], ids_to_search[j]);
                if (result != -1)
@@ -71,27 +82,42 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
            end = clock();  // Finaliza temporizador
            search_time = (double)(end - start) / CLOCKS_PER_SEC;
            times[i] = search_time;  // Guarda el tiempo para el gráfico
-           fprintf(stdout, "Tiempo de búsqueda Sequential Search por ID (base de datos de %d): %.4f segundos - IDs encontrados: %d/10\n", sizes[i], search_time, found_count);
+           fprintf(stdout, "Tiempo de búsqueda Sequential Search por ID (base de datos de %d): %.4f segundos - IDs encontrados: %d/%d\n", sizes[i], search_time, found_count, num_ids);
        }
 
        // Genera gráfico con los resultados
-       const char *plot_title = "Búsqueda Secuencial por ID (10 búsquedas)";
-       const char *plot_filename = "Sequential ID 10";
+       const char *plot_title = "Búsqueda Secuencial por ID";
+       const char *plot_filename = "Sequential ID";
        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
 
+       free(ids_to_search);
        fprintf(stdout, "\nBúsqueda Sequential Search por ID completada. Su gráfico quedó guardado en 'plots'.");
    }
    else if (search_option == 2)
    {
        // Opción 2: Búsqueda secuencial por nombre
-       const char *names_to_search[10] = {
-           "Laptop", "Televiso", "Smartfon", "Auricular", "Tablet",
-           "Impresora", "Monitor", "Teclado", "Mouse", "Cámara"};
+       int num_names;
+       fprintf(stdout, "Cuántos nombres deseas buscar: ");
+       if (scanf("%d", &num_names) != 1)
+       {
+           fprintf(stderr, "\nERROR entrada no válida.\n\n");
+           return;
+       }
 
-       fprintf(stdout, "\nBuscando 10 nombres de productos comunes:\n\n");
-       for (int i = 0; i < 10; i++)
-           fprintf(stdout, "Nombre #%d a buscar: %s\n", i + 1, names_to_search[i]);
-       fprintf(stdout, "\n");
+       char (*names_to_search)[50] = (char (*)[50])malloc(num_names * sizeof(char[50]));
+
+       // Pide al usuario que ingrese los nombres a buscar
+       fprintf(stdout, "\nIngresa los nombres de los productos a buscar:\n");
+       for (int i = 0; i < num_names; i++)
+       {
+           fprintf(stdout, "Nombre #%d: ", i + 1);
+           if (scanf("%s", names_to_search[i]) != 1)
+           {
+               fprintf(stderr, "\nERROR entrada no válida.\n\n");
+               free(names_to_search);
+               return;
+           }
+       }
 
        // Realiza búsquedas en cada inventario
        for (int i = 0; i < 5; i++)
@@ -100,7 +126,7 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
            start = clock();  // Inicia temporizador
 
            // Busca cada nombre y cuenta encontrados
-           for (int j = 0; j < 10; j++)
+           for (int j = 0; j < num_names; j++)
            {
                int result = sequential_search_by_name(dbs[i], names_to_search[j]);
                if (result != -1)
@@ -110,27 +136,50 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
            end = clock();  // Finaliza temporizador
            search_time = (double)(end - start) / CLOCKS_PER_SEC;
            times[i] = search_time;  // Guarda el tiempo para el gráfico
-           fprintf(stdout, "Tiempo de búsqueda Sequential Search por nombre (base de datos de %d): %.4f segundos - Nombres encontrados: %d/10\n", sizes[i], search_time, found_count);
+           fprintf(stdout, "Tiempo de búsqueda Sequential Search por nombre (base de datos de %d): %.4f segundos - Nombres encontrados: %d/%d\n", sizes[i], search_time, found_count, num_names);
        }
 
        // Genera gráfico con los resultados
-       const char *plot_title = "Búsqueda Secuencial por Nombre (10 búsquedas)";
-       const char *plot_filename = "Sequential Name 10";
+       const char *plot_title = "Búsqueda Secuencial por Nombre";
+       const char *plot_filename = "Sequential Name";
        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
 
+       free(names_to_search);
        fprintf(stdout, "\nBúsqueda Sequential Search por nombre completada. Su gráfico quedó guardado en 'plots'.");
    }
    else if (search_option == 3)
    {
        // Opción 3: Búsqueda secuencial por rango de precios
-       double price_ranges[10][2] = {
-           {10.0, 50.0}, {50.0, 100.0}, {100.0, 200.0}, {200.0, 300.0}, {300.0, 500.0}, 
-           {500.0, 700.0}, {700.0, 1000.0}, {1000.0, 1500.0}, {1500.0, 2000.0}, {2000.0, 3000.0}};
+       int num_ranges;
+       fprintf(stdout, "Cuántos rangos de precios deseas buscar: ");
+       if (scanf("%d", &num_ranges) != 1)
+       {
+           fprintf(stderr, "\nERROR entrada no válida.\n\n");
+           return;
+       }
 
-       fprintf(stdout, "\nBuscando productos en 10 rangos de precios diferentes:\n\n");
-       for (int i = 0; i < 10; i++)
-           fprintf(stdout, "Rango #%d: %.2f - %.2f\n", i + 1, price_ranges[i][0], price_ranges[i][1]);
-       fprintf(stdout, "\n");
+       double (*price_ranges)[2] = (double (*)[2])malloc(num_ranges * sizeof(double[2]));
+
+       // Pide al usuario que ingrese los rangos de precios
+       fprintf(stdout, "\nIngresa los rangos de precios (min y max):\n");
+       for (int i = 0; i < num_ranges; i++)
+       {
+           fprintf(stdout, "Rango #%d - Precio mínimo: ", i + 1);
+           if (scanf("%lf", &price_ranges[i][0]) != 1)
+           {
+               fprintf(stderr, "\nERROR entrada no válida.\n\n");
+               free(price_ranges);
+               return;
+           }
+
+           fprintf(stdout, "Rango #%d - Precio máximo: ", i + 1);
+           if (scanf("%lf", &price_ranges[i][1]) != 1)
+           {
+               fprintf(stderr, "\nERROR entrada no válida.\n\n");
+               free(price_ranges);
+               return;
+           }
+       }
 
        // Realiza búsquedas en cada inventario
        for (int i = 0; i < 5; i++)
@@ -139,7 +188,7 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
            start = clock();  // Inicia temporizador
 
            // Busca en cada rango de precios
-           for (int j = 0; j < 10; j++)
+           for (int j = 0; j < num_ranges; j++)
            {
                Product *results_array[50];
                int found = sequential_search_by_price_range(dbs[i], price_ranges[j][0], price_ranges[j][1], results_array, 5);
@@ -150,14 +199,15 @@ void handle_sequential_search(Inventory *first_inv, Inventory *second_inv, Inven
            search_time = (double)(end - start) / CLOCKS_PER_SEC;
            times[i] = search_time;  // Guarda el tiempo para el gráfico
 
-           fprintf(stdout, "\nTiempo de busqueda Sequential Search por rango de precio (base de datos de %d): %.4f - Total rangos: %d\n\n", sizes[i], search_time, total_found);
+           fprintf(stdout, "\nTiempo de búsqueda Sequential Search por rango de precio (base de datos de %d): %.4f - Total rangos: %d\n\n", sizes[i], search_time, total_found);
        }
 
        // Genera gráfico con los resultados
-       const char *plot_title = "Búsqueda Secuencial por Rangos de Precios (10 rangos)";
-       const char *plot_filename = "Sequential Price Range 10";
+       const char *plot_title = "Búsqueda Secuencial por Rangos de Precios";
+       const char *plot_filename = "Sequential Price Range";
        plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
 
+       free(price_ranges);
        fprintf(stdout, "Búsqueda Sequential Search por rango de precios completada. Su gráfico quedó guardado en 'plots'.");
    }
    else

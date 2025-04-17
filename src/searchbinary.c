@@ -96,34 +96,24 @@ int binary_search_upper_bound_price(Inventory *inv, double max_price)
 int binary_search_by_price_range(Inventory *inventory, double min_price, double max_price, Product **results, int max_results)
 {
    int count = 0;
-   const int NUM_ITERATIONS = 1000;
-   int lower_bound, upper_bound;
+   
+   // Encuentra límite inferior del rango
+   int lower_bound = binary_search_lower_bound_price(inventory, min_price);
+   if (lower_bound == -1)
+       return 0;
 
-   for (int iter = 0; iter < NUM_ITERATIONS; iter++)
-   {
-       count = 0;
+   // Encuentra límite superior del rango
+   int upper_bound = binary_search_upper_bound_price(inventory, max_price);
+   if (upper_bound == -1 || upper_bound < lower_bound)
+       return 0;
 
-       // Encuentra límite inferior del rango
-       lower_bound = binary_search_lower_bound_price(inventory, min_price);
-       if (lower_bound == -1)
-           continue;
+   // Calcula cantidad de productos en el rango
+   count = upper_bound - lower_bound + 1;
 
-       // Encuentra límite superior del rango
-       upper_bound = binary_search_upper_bound_price(inventory, max_price);
-       if (upper_bound == -1 || upper_bound < lower_bound)
-           continue;
+   // Almacena resultados
+   int to_store = (count < max_results) ? count : max_results;
+   for (int i = 0; i < to_store; i++)
+       results[i] = &inventory->products[lower_bound + i];
 
-       // Calcula cantidad de productos en el rango
-       count = upper_bound - lower_bound + 1;
-
-       // Almacena resultados solo en la última iteración
-       if (iter == NUM_ITERATIONS - 1)
-       {
-           int to_store = (count < max_results) ? count : max_results;
-           for (int i = 0; i < to_store; i++)
-               results[i] = &inventory->products[lower_bound + i];
-       }
-   }
-
-   return (count < max_results) ? count : max_results;
+   return to_store;
 }
