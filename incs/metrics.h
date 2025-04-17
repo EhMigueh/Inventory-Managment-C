@@ -1,5 +1,6 @@
 #ifndef METRICS_H
 #define METRICS_H
+
 #include <string.h>
 #include <time.h>
 #include "inventory.h"

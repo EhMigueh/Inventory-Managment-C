@@ -1,5 +1,6 @@
 #ifndef SEARCH_H
 #define SEARCH_H
+
 #include <time.h>
 #include <string.h>
 

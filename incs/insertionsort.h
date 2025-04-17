@@ -1,5 +1,6 @@
 #ifndef INSERTION_SORT_H
 #define INSERTION_SORT_H
+
 #include "inventory.h"
 
 // Funciones de ordenación por inserción

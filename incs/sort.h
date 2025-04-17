@@ -1,6 +1,8 @@
 #ifndef SORT_H
 #define SORT_H
+
 #include <string.h>
+
 #include "stdbool.h"
 #include "bubblesort.h"
 #include "insertionsort.h"

@@ -1,5 +1,6 @@
 #ifndef SELECTION_SORT_H
 #define SELECTION_SORT_H
+
 #include "inventory.h"
 #include "stdbool.h"
 // Funciones de ordenación por selección

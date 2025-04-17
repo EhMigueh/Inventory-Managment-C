@@ -1,5 +1,6 @@
 #ifndef BINARY_SEARCH_H
 #define BINARY_SEARCH_H
+
 #include "inventory.h"
 #include "stdbool.h"
 // Funciones de búsqueda binaria

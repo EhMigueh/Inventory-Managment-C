@@ -6,7 +6,6 @@
 #include <string.h>
 #include <time.h>
 
-
 #define FIRST_DB_SIZE 10000        // Tamaño de base de datos 1
 #define SECOND_DB_SIZE 25000       // Tamaño de base de datos 2
 #define THIRD_DB_SIZE 50000        // Tamaño de base de datos 3

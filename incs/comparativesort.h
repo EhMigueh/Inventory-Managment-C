@@ -1,5 +1,6 @@
 #ifndef COMPARATIVE_SORT_H
 #define COMPARATIVE_SORT_H
+
 #include "inventory.h"
 
 // Función de ordenamiento comparativo

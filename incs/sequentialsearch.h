@@ -1,5 +1,6 @@
 #ifndef SEQUENTIAL_SEARCH_H
 #define SEQUENTIAL_SEARCH_H
+
 #include "inventory.h"
 
 // Funciones de búsqueda secuencial

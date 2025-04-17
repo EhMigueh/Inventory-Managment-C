@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "db.h"
+
 #define GP_MAX_TMP_FILES 64
 
 // Estructura para manejar la comunicación con gnuplot.
