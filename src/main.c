@@ -1,5 +1,9 @@
 #include "inventory.h"
-
+#include "db.h"
+#include "utils.h"
+#include "search.h"
+#include "sort.h"
+#include "metrics.h"
 int main(void)
 {
     Inventory *first_inv = create_inventory(FIRST_DB_SIZE);

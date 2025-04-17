@@ -1,5 +1,8 @@
 #include "inventory.h"
-
+#include "utils.h"
+#include "search.h"
+#include "sort.h"
+#include "plot.h"
 void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
 {
     int search_option, use_recursive;
@@ -77,7 +80,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
         }
 
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por ID (10 búsquedas)" : "Búsqueda Binaria Iterativa por ID (10 búsquedas)";
-        const char *plot_filename = use_recursive ? "Binary_Recursive_ID_10" : "Binary_Iterative_ID_10";
+        const char *plot_filename = use_recursive ? "Binary Recursive ID " : "Binary Iterative ID ";
         plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
         fprintf(stdout, "\nBúsqueda binaria por ID completada. Su gráfico quedó guardado en 'plots'.");
     }
@@ -119,7 +122,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
         }
 
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Nombre (10 búsquedas)" : "Búsqueda Binaria Iterativa por Nombre (10 búsquedas)";
-        const char *plot_filename = use_recursive ? "Binary_Recursive_Name_10" : "Binary_Iterative_Name_10";
+        const char *plot_filename = use_recursive ? "Binary Recursive Name" : "Binary Iterative Name ";
         plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
         fprintf(stdout, "\nBúsqueda binaria por nombre completada. Su gráfico quedó guardado en 'plots'.");
     }
@@ -161,7 +164,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
         }
 
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Rango de Precios (10 búsquedas)" : "Búsqueda Binaria Iterativa por Rango de Precios (10 búsquedas)";
-        const char *plot_filename = use_recursive ? "Binary_Recursive_Price_10" : "Binary_Iterative_Price_10";
+        const char *plot_filename = use_recursive ? "Binary Recursive Price " : "Binary Iterative Price ";
         plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
         fprintf(stdout, "\nBúsqueda binaria por rango de precios completada. Su gráfico quedó guardado en 'plots'.");
     }

@@ -1,4 +1,5 @@
 #include "inventory.h"
+#include <stdio.h>
 
 void save_sorted_inventory(Inventory *inv, const char *sort_criteria)
 {

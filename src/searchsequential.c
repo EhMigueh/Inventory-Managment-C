@@ -1,5 +1,5 @@
 #include "inventory.h"
-
+#include "search.h"
 // Búsqueda secuencial por ID
 int sequential_search_by_id(Inventory *inv, int id)
 {

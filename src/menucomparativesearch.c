@@ -1,4 +1,10 @@
 #include "inventory.h"
+#include "search.h"
+#include "sort.h"
+#include "utils.h"
+#include "metrics.h"
+#include "plot.h"
+#include "comparativesearch.h"
 
 void handle_comparative_search(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
 {

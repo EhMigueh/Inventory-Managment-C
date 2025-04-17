@@ -1,110 +1,49 @@
-#include <stdio.h>
+#ifndef INVENTORY_H
+#define INVENTORY_H
+
+#include "product.h"
 #include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <stdbool.h>
-#include "gnuplot_i.h"
+#include <stdio.h>
 
-#define FIRST_DB_SIZE 10000
-#define SECOND_DB_SIZE 25000
-#define THIRD_DB_SIZE 50000
-#define FOURTH_DB_SIZE 75000
-#define FIFTH_DB_SIZE 100000
-#define MAX_NAME_LENGTH 10
-#define MAX_CATEGORY_LENGTH 10
-
-// Estrucutra para representar los productos.
-typedef struct
-{
-    int id;
-    char name[MAX_NAME_LENGTH];
-    char category[MAX_CATEGORY_LENGTH];
-    double price;
-    int stock;
-} Product;
-
-// Estructura para representar un inventario.
-typedef struct
-{
-    Product *products; // Puntero a array de productos.
-    int count;         // Productos almacenados en este momento.
-    int capacity;      // Capacidad maxima de productos.
+typedef struct {
+    Product *products;  // Puntero a un arreglo de productos
+    int count;          // Número actual de productos en el inventario
+    int capacity;       // Capacidad máxima del inventario
 } Inventory;
 
-// Manejo del inventario.
-Inventory *create_inventory(int);
-void free_inventory(Inventory *);
-void free_invs(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
-int load_inventory_from_file(Inventory *, const char *);
-void load_all_inventories(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
+// Funciones relacionadas con la creación y liberación de inventarios
 
-// Funciones Auxiliares.
-void print_menu();
-void print_menu_sort();
-void print_menu_search();
-void print_menu_metrics();
-void print_stats(Inventory *, int);
-void clean_terminal();
-void plot_test_times(int *, double *, int, const char *, const char *, const char *, int);
-void plot_comparative_sort_times(int *, double *, double *, double *, int, const char *, const char *, const char *);
-void plot_comparative_search_times(int *, double *, double *, double *, int, const char *, const char *, const char *);
-// Funciones de Error.
-void save_sorted_inventory(Inventory *, const char *);
+// Crea un inventario con la capacidad especificada (se asigna memoria para el arreglo de productos)
+Inventory *create_inventory(int capacity);
 
-// Algoritmo BubbleSort.
-void handle_bubble_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
-void bubble_sort_by_price(Inventory *);
-void bubble_sort_by_stock(Inventory *);
-void bubble_sort_by_name(Inventory *);
-void bubble_sort_by_id(Inventory *);
+// Libera la memoria ocupada por el inventario
+void free_inventory(Inventory *inventory);
 
-// Algoritmo InsertionSort.
-void handle_insertion_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
-void insertion_sort_by_price(Inventory *);
-void insertion_sort_by_stock(Inventory *);
-void insertion_sort_by_name(Inventory *);
-void insertion_sort_by_id(Inventory *);
+// Libera la memoria de cinco inventarios diferentes
+void free_invs(Inventory *inv1, Inventory *inv2, Inventory *inv3, Inventory *inv4, Inventory *inv5);
 
-// Algoritmo SelectionSort.
-void handle_selection_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
-void selection_sort_by_price(Inventory *);
-void selection_sort_by_stock(Inventory *);
-void selection_sort_by_name(Inventory *);
-void selection_sort_by_id(Inventory *);
+// Carga los productos desde un archivo CSV en un inventario
+int load_inventory_from_file(Inventory *inventory, const char *filename);
 
-// Algoritmo Busqueda Secuencial
-void handle_sequential_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
-int sequential_search_by_id(Inventory *, int);
-int sequential_search_by_name(Inventory *, const char *);
-int sequential_search_by_price_range(Inventory *, double, double, Product **, int);
+// Carga los productos en cinco inventarios diferentes desde archivos
+void load_all_inventories(Inventory *inv1, Inventory *inv2, Inventory *inv3, Inventory *inv4, Inventory *inv5);
 
-// Algoritmo Busqueda Binaria
-void handle_binary_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
-int binary_search_by_id(Inventory *, int);
-int binary_search_by_name(Inventory *, const char *);
-int binary_search_by_price_range(Inventory *, double, double, Product **, int);
-int binary_search_lower_bound_price(Inventory *inv, double min_price);
-int binary_search_upper_bound_price(Inventory *inv, double max_price);
+// Obtiene el número total de productos en el inventario
+int get_total_products(Inventory *inventory);
 
-// Algoritmo Busqueda Binaria (Recursiva)
-int binary_search_by_id_recursive(Inventory *, int, int, int);
-int binary_search_by_name_recursive(Inventory *, const char *, int, int);
-int binary_search_by_price_range_recursive(Inventory *, double, double, Product **, int);
+// Obtiene el valor total del inventario (suma de los precios de todos los productos)
+double get_total_inventory_value(Inventory *inventory);
 
-int find_lower_bound_recursive(Inventory *inv, double min_price, int left, int right);
-int find_upper_bound_recursive(Inventory *inv, double max_price, int left, int right);
+// Obtiene el producto con el mayor stock en el inventario
+Product *get_product_with_max_stock(Inventory *inventory);
 
-// Alogritmo Comparativo de Ordenamiento
-void handle_comparative_sort(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
-void handle_comparative_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
+// Obtiene el producto con el menor stock en el inventario
+Product *get_product_with_min_stock(Inventory *inventory);
 
-// Funciones de Métricas
-void handle_inventory_metrics(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
-int get_total_products(Inventory *);
-double get_total_inventory_value(Inventory *);
-Product *get_product_with_max_stock(Inventory *);
-Product *get_product_with_min_stock(Inventory *);
-Product *get_most_expensive_product(Inventory *);
-Product *get_cheapest_product(Inventory *);
-void print_product_in_table(Product *);
-void format_with_commas(double, char *);
+// Obtiene el producto más caro en el inventario
+Product *get_most_expensive_product(Inventory *inventory);
+
+// Obtiene el producto más barato en el inventario
+Product *get_cheapest_product(Inventory *inventory);
+
+#endif  

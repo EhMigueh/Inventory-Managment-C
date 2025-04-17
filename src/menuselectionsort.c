@@ -1,5 +1,8 @@
 #include "inventory.h"
-
+#include "sort.h"
+#include "utils.h"
+#include "metrics.h" 
+#include "plot.h"
 void handle_selection_sort(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
 {
     int search_option;
@@ -60,5 +63,5 @@ void handle_selection_sort(Inventory *first_inv, Inventory *second_inv, Inventor
     }
 
     fprintf(stdout, "Ordenamiento Selection Sort por %s completado. Su gráfico quedó guardado en 'plots'.", labels[index]);
-    plot_test_times(sizes, times, 5, plot_titles[index], plot_route, plot_filenames[index], 0);    
+    plot_test_times(sizes, times, 5, plot_titles[index], plot_route, plot_filenames[index], 0);   
 }

@@ -1,5 +1,5 @@
 #include "inventory.h"
-
+#include "sort.h"
 // Ordena el inventario por precio.
 void bubble_sort_by_price(Inventory *inv)
 {

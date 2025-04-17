@@ -1,4 +1,6 @@
 #include "inventory.h"
+#include "metrics.h"
+#include "utils.h"
 
 void handle_inventory_metrics(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
 {

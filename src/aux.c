@@ -1,4 +1,9 @@
+#include "plot.h"
+#include "utils.h"
+#include "product.h"
 #include "inventory.h"
+
+
 
 // Imprime el menu del programa.
 void print_menu()
