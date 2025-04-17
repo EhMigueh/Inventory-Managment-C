@@ -6,7 +6,7 @@
 // Inclusión de los archivos de búsqueda específicos
 #include "sequentialsearch.h"
 #include "binarysearch.h"
-#include "searchutils.h"
+#include "binarysearchrecursive.h"
 #include "comparativesearch.h"
 
 #endif
