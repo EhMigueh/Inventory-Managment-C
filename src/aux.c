@@ -135,16 +135,12 @@ void plot_test_times(int *sizes, double *times, int n, const char *title, const 
     gnuplot_cmd(gp, "set title '%s'", title);
     gnuplot_cmd(gp, "set xlabel 'Cantidad de productos'");
     gnuplot_cmd(gp, "set ylabel 'Tiempo (%s)'", time_unit);
-
-    // Rango dinámico con margen
-    double y_min = 0.9 * scaled_times[0];
-    double y_max = 1.1 * scaled_times[n - 1];
-    if (y_max - y_min < 1.0)
-    {
-        y_min = scaled_times[0] - 1.0;
-        y_max = scaled_times[n - 1] + 1.0;
-    }
-    gnuplot_cmd(gp, "set yrange [%f:%f]", y_min, y_max);
+    
+    // Forzar que el eje Y comience en 0
+    gnuplot_cmd(gp, "set yrange [0:*]");
+    
+    // Añadir cuadrícula para mejor visualización
+    gnuplot_cmd(gp, "set grid");
 
     // Configurar salida
     gnuplot_cmd(gp, "set term png");
@@ -156,7 +152,6 @@ void plot_test_times(int *sizes, double *times, int n, const char *title, const 
     free(sizes_double);
     gnuplot_close(gp);
 }
-
 
 // Función para graficar los tiempos de búsqueda (REVISAR).
 void plot_search_times(int *sizes, double *times, int n, const char *title, const char *label)
