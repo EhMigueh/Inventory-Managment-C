@@ -13,14 +13,14 @@ void handle_inventory_metrics(Inventory *first_inv, Inventory *second_inv, Inven
     {
         print_menu_metrics();
 
-        // Solicitar opción al usuario
+        // Solicitar opción al usuario.
         fprintf(stdout, "\nSelecciona una opción: ");
         if (scanf("%d", &search_option) != 1)
         {
             clean_terminal();
             fprintf(stderr, "\nERROR entrada no válida. Por favor, introduce un número.\n\n");
             while (getchar() != '\n')
-                ; // Limpiar el buffer
+                ; // Limpiar el buffer.
             continue;
         }
 
@@ -31,7 +31,7 @@ void handle_inventory_metrics(Inventory *first_inv, Inventory *second_inv, Inven
             return;
         }
 
-        if (search_option < 1 || search_option > 6) // Cambié el límite a 6 para incluir las nuevas opciones
+        if (search_option < 1 || search_option > 6) // Cambié el límite a 6 para incluir las nuevas opciones.
         {
             clean_terminal();
             fprintf(stderr, "ERROR opción inválida. Solo se permite 1, 2, 3, 4, 5, 6 o 0 para salir.\n\n");
