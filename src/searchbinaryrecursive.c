@@ -79,36 +79,21 @@ int find_upper_bound_recursive(Inventory *inv, double max_price, int left, int r
 // Busca productos en un rango de precios específico
 int binary_search_by_price_range_recursive(Inventory *inventory, double min_price, double max_price, Product **results, int max_results)
 {
-   int count = 0;
-   const int NUM_ITERATIONS = 1000;
-   struct timespec start, end;
+    // Busca el límite inferior del rango
+    int lower_bound = find_lower_bound_recursive(inventory, min_price, 0, inventory->count - 1);
+    if (lower_bound == -1)
+        return 0;
 
-   clock_gettime(CLOCK_MONOTONIC, &start);  // Inicia medición de tiempo
+    // Busca el límite superior del rango
+    int upper_bound = find_upper_bound_recursive(inventory, max_price, 0, inventory->count - 1);
+    if (upper_bound == -1 || upper_bound < lower_bound)
+        return 0;
 
-   for (int iter = 0; iter < NUM_ITERATIONS; iter++)
-   {
-       count = 0;
+    int count = upper_bound - lower_bound + 1;
+    int to_store = (count < max_results) ? count : max_results;
 
-       // Busca el límite inferior del rango
-       int lower_bound = find_lower_bound_recursive(inventory, min_price, 0, inventory->count - 1);
-       if (lower_bound == -1) continue;
+    for (int i = 0; i < to_store; i++)
+        results[i] = &inventory->products[lower_bound + i];
 
-       // Busca el límite superior del rango
-       int upper_bound = find_upper_bound_recursive(inventory, max_price, 0, inventory->count - 1);
-       if (upper_bound == -1 || upper_bound < lower_bound) continue;
-
-       count = upper_bound - lower_bound + 1;
-
-       // Almacena resultados solo en la última iteración
-       if (iter == NUM_ITERATIONS - 1)
-       {
-           int to_store = (count < max_results) ? count : max_results;
-           for (int i = 0; i < to_store; i++)
-               results[i] = &inventory->products[lower_bound + i];
-       }
-   }
-
-   clock_gettime(CLOCK_MONOTONIC, &end);  // Termina medición de tiempo
-
-   return (count < max_results) ? count : max_results;
+    return to_store;
 }

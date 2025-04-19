@@ -3,6 +3,7 @@
 #include "search.h"
 #include "sort.h"
 #include "plot.h"
+
 void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory *third_inv, Inventory *fourth_inv, Inventory *fifth_inv)
 {
     int search_option, use_recursive;
@@ -114,7 +115,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
 
         // Genera gráfico con los resultados
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por ID" : "Búsqueda Binaria Iterativa por ID";
-        const char *plot_filename = use_recursive ? "Binary_Recursive_ID" : "Binary_Iterative_ID";
+        const char *plot_filename = use_recursive ? "Binary Recursive ID" : "Binary Iterative ID";
         plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
 
         free(ids_to_search);
@@ -192,7 +193,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
 
         // Genera gráfico con los resultados
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Nombre" : "Búsqueda Binaria Iterativa por Nombre";
-        const char *plot_filename = use_recursive ? "Binary Recursive Name" : "Binary_Iterative_Name";
+        const char *plot_filename = use_recursive ? "Binary Recursive Name" : "Binary Iterative Name";
         plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
 
         free(names_to_search);
@@ -280,7 +281,7 @@ void handle_binary_search(Inventory *first_inv, Inventory *second_inv, Inventory
 
         // Genera gráfico con los resultados
         const char *plot_title = use_recursive ? "Búsqueda Binaria Recursiva por Rangos de Precios" : "Búsqueda Binaria Iterativa por Rangos de Precios";
-        const char *plot_filename = use_recursive ? "Binary_Recursive_Price_Range" : "Binary_Iterative_Price_Range";
+        const char *plot_filename = use_recursive ? "Binary Recursive Price Range" : "Binary Iterative Price Range";
         plot_test_times(sizes, times, 5, plot_title, plot_route, plot_filename, 1);
 
         free(price_ranges);
