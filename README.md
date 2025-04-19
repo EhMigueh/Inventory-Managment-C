@@ -27,6 +27,8 @@ En este conjunto de directorios está desarrollado el análisis de rendimiento d
 
 implementar y analizar algoritmos básicos de ordenación y búsqueda, aplicándolos a un sistema de gestión de inventario. El equipo deben desarrollar un sistema que permita ordenar y buscar productos según diferentes criterios, evaluando el rendimiento de los algoritmos implementados.
 
+---
+
 ## Descripción del Proyecto ✏️
 Este proyecto simula un sistema de gestión de inventario donde se deberán implementar distintas funcionalidades, como:
 
@@ -36,23 +38,37 @@ Este proyecto simula un sistema de gestión de inventario donde se deberán impl
 4. Análisis estadístico del inventario, calculando métricas como valor total, productos más/menos populares, promedios por categoría.
 5. Interacción mediante interfaz de comandos que permita al usuario gestionar todo el sistema de manera intuitiva.
 
-
 ---
 
-## Explicación de Directorios
+## Explicación de Directorios 📁
+
 El proyecto de sistema de gestión de inventario posee muchos directorios, la explicación de los directorios importantes es la siguiente:
 
- - *incs*     : Headers (.h)
- - *src*      : Código fuente principal (.c)
- - *srcdb*    : Código relacionado a la base de datos (.c y .h)
- - *db*       : Archivos CSV con los datos
- - *plots*    : Gráficos de análisis
- - *docs*     : Documentación del proyecto
-
+ - *incs*     : Headers (.h).
+ - *src*      : Código fuente principal (.c).
+ - *srcdb*    : Código relacionado a la base de datos (.c y .h).
+ - *db*       : Archivos CSV con los datos.
+ - *plots*    : Gráficos de análisis.
+ - *docs*     : Documentación del proyecto.
 
 ---
 
-## Documentación 📚
+## Gnuplot 📈
 
+Para poder ejecutar el programa sin problemas asegurece de tener instalado en su sistema gnuplot. Si está en linux o WSL puede instalarlo por medio del siguiente comando en su terminal:
 
-## comentar sobre el makefile, utilización código, instalación de gnuplot...
+- sudo apt-get install gnuplot
+
+---
+
+## Funcionalidad del Programa 🛠️
+
+Para poder ejecutar el programa debe ejecutar los siguientes comandos en el siguiente orden dentro de la carpeta grupo_5 en su terminal:
+
+- make clean
+- make
+- make run
+
+Una vez hecho el make run puede sentirse libre de explorar todas las opciones que brinda el programa.
+
+---
