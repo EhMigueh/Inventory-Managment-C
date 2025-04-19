@@ -62,6 +62,8 @@ void print_menu_metrics() {
     printf("║ 2. Valor total del inventario                    ║\n");
     printf("║ 3. Producto con mayor y menor stock              ║\n");
     printf("║ 4. Producto más caro y más barato                ║\n");
+    printf("║ 5. Promedio de precios por categoría             ║\n");
+    printf("║ 6. Cantidad de productos por categoría           ║\n");
     printf("║ 0. Volver al menú anterior                       ║\n");
     printf("╚══════════════════════════════════════════════════╝\n");
 }
