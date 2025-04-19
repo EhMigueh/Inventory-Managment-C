@@ -7,4 +7,3 @@
 void handle_comparative_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);
 
 #endif
- 

@@ -55,7 +55,7 @@ void handle_comparative_sort(Inventory *first_inv, Inventory *second_inv, Invent
 
     int index = search_option - 1;
 
-    // Ejecución de Bubble Sort
+    // Ejecución de Bubble Sort.
     for (int i = 0; i < 5; i++)
     {
         start = clock();
@@ -69,7 +69,7 @@ void handle_comparative_sort(Inventory *first_inv, Inventory *second_inv, Invent
 
     load_all_inventories(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
 
-    // Ejecución de Selection Sort
+    // Ejecución de Selection Sort.
     for (int i = 0; i < 5; i++)
     {
         start = clock();
@@ -83,7 +83,7 @@ void handle_comparative_sort(Inventory *first_inv, Inventory *second_inv, Invent
 
     load_all_inventories(first_inv, second_inv, third_inv, fourth_inv, fifth_inv);
 
-    // Ejecución de Insertion Sort
+    // Ejecución de Insertion Sort.
     for (int i = 0; i < 5; i++)
     {
         start = clock();

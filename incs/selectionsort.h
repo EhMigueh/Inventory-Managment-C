@@ -3,6 +3,7 @@
 
 #include "inventory.h"
 #include "stdbool.h"
+
 // Funciones de ordenación por selección
 void selection_sort_by_price(Inventory *);
 void selection_sort_by_stock(Inventory *);

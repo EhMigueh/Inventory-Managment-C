@@ -10,9 +10,9 @@
 // Estructura para manejar la comunicación con gnuplot.
 typedef struct _gnuplot_ctrl
 {
-    FILE *gp_pipe; // Pipe para la comunicación con gnuplot.
+    FILE *gp_pipe;                            // Pipe para la comunicación con gnuplot.
     char *tmp_filename_tbl[GP_MAX_TMP_FILES]; // Archivos temporales usados por gnuplot.
-    int nplots; // Número de gráficos.
+    int nplots;                               // Número de gráficos.
 } gnuplot_ctrl;
 
 // Inicializa la comunicación con gnuplot.

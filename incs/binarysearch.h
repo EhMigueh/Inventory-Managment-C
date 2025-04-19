@@ -3,7 +3,6 @@
 
 #include "inventory.h"
 #include "stdbool.h"
-// Funciones de búsqueda binaria
 
 // Gestiona diferentes tipos de búsqueda binaria sobre el inventario.
 void handle_binary_search(Inventory *, Inventory *, Inventory *, Inventory *, Inventory *);

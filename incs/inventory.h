@@ -5,13 +5,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct {
-    Product *products;  // Puntero a un arreglo de productos
-    int count;          // Número actual de productos en el inventario
-    int capacity;       // Capacidad máxima del inventario
+typedef struct
+{
+    Product *products; // Puntero a un arreglo de productos
+    int count;         // Número actual de productos en el inventario
+    int capacity;      // Capacidad máxima del inventario
 } Inventory;
-
-// Funciones relacionadas con la creación y liberación de inventarios
 
 // Crea un inventario con la capacidad especificada (se asigna memoria para el arreglo de productos)
 Inventory *create_inventory(int capacity);
@@ -46,4 +45,4 @@ Product *get_most_expensive_product(Inventory *inventory);
 // Obtiene el producto más barato en el inventario
 Product *get_cheapest_product(Inventory *inventory);
 
-#endif  
+#endif

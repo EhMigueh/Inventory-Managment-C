@@ -3,87 +3,84 @@
 #include "product.h"
 #include "inventory.h"
 
-
-
 // Imprime el menu del programa.
 void print_menu()
 {
-    printf("\n╔════════════════════════════════════════════════════╗\n");
-    printf("║                 MENÚ PRINCIPAL                     ║\n");
-    printf("╠════════════════════════════════════════════════════╣\n");
-    printf("║ 1. Realizar pruebas de ordenamiento BUBBLE SORT    ║\n");
-    printf("║ 2. Realizar pruebas de ordenamiento SELECTION SORT ║\n");
-    printf("║ 3. Realizar pruebas de ordenamiento INSERTION SORT ║\n");
-    printf("║ 4. Realizar pruebas de búsqueda SECUENCIAL         ║\n");
-    printf("║ 5. Realizar pruebas de búsqueda BINARIA            ║\n");
-    printf("║ 6. Realizar COMPARATIVA ORDENAMIENTO               ║\n");
-    printf("║ 7. Realizar COMPARATIVA BÚSQUEDA                   ║\n");
-    printf("║ 8. Mostrar MÉTRICAS del inventario                 ║\n");
-    printf("║ 0. Salir                                           ║\n");
-    printf("╚════════════════════════════════════════════════════╝\n");
+    fprintf(stdout, "\n╔════════════════════════════════════════════════════╗\n");
+    fprintf(stdout, "║                 MENÚ PRINCIPAL                     ║\n");
+    fprintf(stdout, "╠════════════════════════════════════════════════════╣\n");
+    fprintf(stdout, "║ 1. Realizar pruebas de ordenamiento BUBBLE SORT    ║\n");
+    fprintf(stdout, "║ 2. Realizar pruebas de ordenamiento SELECTION SORT ║\n");
+    fprintf(stdout, "║ 3. Realizar pruebas de ordenamiento INSERTION SORT ║\n");
+    fprintf(stdout, "║ 4. Realizar pruebas de búsqueda SECUENCIAL         ║\n");
+    fprintf(stdout, "║ 5. Realizar pruebas de búsqueda BINARIA            ║\n");
+    fprintf(stdout, "║ 6. Realizar COMPARATIVA ORDENAMIENTO               ║\n");
+    fprintf(stdout, "║ 7. Realizar COMPARATIVA BÚSQUEDA                   ║\n");
+    fprintf(stdout, "║ 8. Mostrar MÉTRICAS del inventario                 ║\n");
+    fprintf(stdout, "║ 0. Salir                                           ║\n");
+    fprintf(stdout, "╚════════════════════════════════════════════════════╝\n");
 }
-
 
 // Imprime el menu de ordenamiento.
 void print_menu_sort()
 {
-    printf("\n╔══════════════════════════════════════════════════╗\n");
-    printf("║              MENÚ DE ORDENAMIENTO                ║\n");
-    printf("╠══════════════════════════════════════════════════╣\n");
-    printf("║ 1. Ordenar por precio                            ║\n");
-    printf("║ 2. Ordenar por stock                             ║\n");
-    printf("║ 3. Ordenar por ID                                ║\n");
-    printf("║ 4. Ordenar por nombre                            ║\n");
-    printf("║ 0. Volver al menú principal                      ║\n");
-    printf("╚══════════════════════════════════════════════════╝\n");
+    fprintf(stdout, "\n╔══════════════════════════════════════════════════╗\n");
+    fprintf(stdout, "║              MENÚ DE ORDENAMIENTO                ║\n");
+    fprintf(stdout, "╠══════════════════════════════════════════════════╣\n");
+    fprintf(stdout, "║ 1. Ordenar por precio                            ║\n");
+    fprintf(stdout, "║ 2. Ordenar por stock                             ║\n");
+    fprintf(stdout, "║ 3. Ordenar por ID                                ║\n");
+    fprintf(stdout, "║ 4. Ordenar por nombre                            ║\n");
+    fprintf(stdout, "║ 0. Volver al menú principal                      ║\n");
+    fprintf(stdout, "╚══════════════════════════════════════════════════╝\n");
 }
-
 
 // Imprime el menu de búsqueda.
 void print_menu_search()
 {
-    printf("\n╔══════════════════════════════════════════════════╗\n");
-    printf("║                MENÚ DE BÚSQUEDA                  ║\n");
-    printf("╠══════════════════════════════════════════════════╣\n");
-    printf("║ 1. Búsqueda por ID                               ║\n");
-    printf("║ 2. Búsqueda por nombre exacto                    ║\n");
-    printf("║ 3. Búsqueda por rango de precios                 ║\n");
-    printf("║ 0. Volver al menú principal                      ║\n");
-    printf("╚══════════════════════════════════════════════════╝\n");
+    fprintf(stdout, "\n╔══════════════════════════════════════════════════╗\n");
+    fprintf(stdout, "║                MENÚ DE BÚSQUEDA                  ║\n");
+    fprintf(stdout, "╠══════════════════════════════════════════════════╣\n");
+    fprintf(stdout, "║ 1. Búsqueda por ID                               ║\n");
+    fprintf(stdout, "║ 2. Búsqueda por nombre exacto                    ║\n");
+    fprintf(stdout, "║ 3. Búsqueda por rango de precios                 ║\n");
+    fprintf(stdout, "║ 0. Volver al menú principal                      ║\n");
+    fprintf(stdout, "╚══════════════════════════════════════════════════╝\n");
 }
-
 
 // Imprime el menu de métricas.
-void print_menu_metrics() {
-    printf("\n╔══════════════════════════════════════════════════╗\n");
-    printf("║            MENÚ DE MÉTRICAS DEL INVENTARIO       ║\n");
-    printf("╠══════════════════════════════════════════════════╣\n");
-    printf("║ 1. Total de productos                            ║\n");
-    printf("║ 2. Valor total del inventario                    ║\n");
-    printf("║ 3. Producto con mayor y menor stock              ║\n");
-    printf("║ 4. Producto más caro y más barato                ║\n");
-    printf("║ 5. Promedio de precios por categoría             ║\n");
-    printf("║ 6. Cantidad de productos por categoría           ║\n");
-    printf("║ 0. Volver al menú anterior                       ║\n");
-    printf("╚══════════════════════════════════════════════════╝\n");
+void print_menu_metrics()
+{
+    fprintf(stdout, "\n╔══════════════════════════════════════════════════╗\n");
+    fprintf(stdout, "║            MENÚ DE MÉTRICAS DEL INVENTARIO       ║\n");
+    fprintf(stdout, "╠══════════════════════════════════════════════════╣\n");
+    fprintf(stdout, "║ 1. Total de productos                            ║\n");
+    fprintf(stdout, "║ 2. Valor total del inventario                    ║\n");
+    fprintf(stdout, "║ 3. Producto con mayor y menor stock              ║\n");
+    fprintf(stdout, "║ 4. Producto más caro y más barato                ║\n");
+    fprintf(stdout, "║ 5. Promedio de precios por categoría             ║\n");
+    fprintf(stdout, "║ 6. Cantidad de productos por categoría           ║\n");
+    fprintf(stdout, "║ 0. Volver al menú anterior                       ║\n");
+    fprintf(stdout, "╚══════════════════════════════════════════════════╝\n");
 }
 
-void print_product_in_table(Product *product) {
-    if (product != NULL) {
+void print_product_in_table(Product *product)
+{
+    if (product != NULL)
+    {
         char price_formatted[50];
         char stock_formatted[50];
 
         format_with_commas(product->price, price_formatted);
         format_with_commas((double)product->stock, stock_formatted);
 
-        // Imprimir el encabezado de la tabla
-        printf("  ➤ Producto: %s\n", product->name);
-        printf("╔════════════╦════════════╦══════════════╦════════════╦════════════╗\n");
-        printf("║   ID       ║  Nombre    ║  Categoría   ║  Precio    ║  Stock     ║\n");
-        printf("╠════════════╬════════════╬══════════════╬════════════╬════════════╣\n");
-        printf("║ %-10d ║ %-10s ║ %-12s ║ $%-10s║ %-10s ║\n", 
-               product->id, product->name, product->category, price_formatted, stock_formatted);
-        printf("╚════════════╩════════════╩══════════════╩════════════╩════════════╝\n");
+        // Imprimir el encabezado de la tabla.
+        fprintf(stdout, "  ➤ Producto: %s\n", product->name);
+        fprintf(stdout, "╔════════════╦════════════╦══════════════╦════════════╦════════════╗\n");
+        fprintf(stdout, "║   ID       ║  Nombre    ║  Categoría   ║  Precio    ║  Stock     ║\n");
+        fprintf(stdout, "╠════════════╬════════════╬══════════════╬════════════╬════════════╣\n");
+        fprintf(stdout, "║ %-10d ║ %-10s ║ %-12s ║ $%-10s║ %-10s ║\n", product->id, product->name, product->category, price_formatted, stock_formatted);
+        fprintf(stdout, "╚════════════╩════════════╩══════════════╩════════════╩════════════╝\n");
     }
 }
 
@@ -107,55 +104,55 @@ void plot_test_times(int *sizes, double *times, int n, const char *title, const 
 {
     gnuplot_ctrl *gp = gnuplot_init();
 
-    // Determinar escala según el tipo de algoritmo
+    // Determinar escala según el tipo de algoritmo.
     double scale_factor;
     const char *time_unit;
 
     if (is_search)
     {
-        scale_factor = 1e9; // nanosegundos
+        scale_factor = 1e9; // Nanosegundos.
         time_unit = "ns";
     }
     else
     {
-        scale_factor = 1.0; // segundos
+        scale_factor = 1.0; // Segundos.
         time_unit = "s";
     }
 
-    // Escalar los tiempos
+    // Escalar los tiempos.
     double scaled_times[n];
     for (int i = 0; i < n; i++)
         scaled_times[i] = times[i] * scale_factor;
 
-    // Convertir sizes a double
+    // Convertir sizes a double.
     double *sizes_double = (double *)malloc(n * sizeof(double));
     for (int i = 0; i < n; i++)
         sizes_double[i] = (double)sizes[i];
 
-    // Definir estilo y etiquetas
+    // Definir estilo y etiquetas.
     gnuplot_setstyle(gp, "linespoints");
     gnuplot_cmd(gp, "set title '%s'", title);
     gnuplot_cmd(gp, "set xlabel 'Cantidad de productos'");
     gnuplot_cmd(gp, "set ylabel 'Tiempo (%s)'", time_unit);
-    
-    // Forzar que el eje Y comience en 0
+
+    // Forzar que el eje Y comience en 0.
     gnuplot_cmd(gp, "set yrange [0:*]");
-    
-    // Añadir cuadrícula para mejor visualización
+
+    // Añadir cuadrícula para mejor visualización.
     gnuplot_cmd(gp, "set grid");
 
-    // Configurar salida
+    // Configurar salida.
     gnuplot_cmd(gp, "set term png");
     gnuplot_cmd(gp, "set output 'plots/%s/%s.png'", plot_route, filename);
 
-    // Graficar
+    // Graficar.
     gnuplot_plot_xy(gp, sizes_double, scaled_times, n, title);
 
     free(sizes_double);
     gnuplot_close(gp);
 }
 
-// Función para graficar los tiempos de búsqueda (REVISAR).
+// Función para graficar los tiempos de búsqueda.
 void plot_search_times(int *sizes, double *times, int n, const char *title, const char *label)
 {
     char filename[128];
@@ -183,7 +180,7 @@ void plot_search_times(int *sizes, double *times, int n, const char *title, cons
     pclose(gp);
 }
 
-// Función para graficar los tiempos de ordenamiento comparativo (REVISAR).
+// Función para graficar los tiempos de ordenamiento comparativo.
 void plot_comparative_sort_times(int *sizes, double *bubble_times, double *selection_times, double *insertion_times, int count, const char *label, const char *plot_route, const char *plot_title)
 {
     FILE *gnuplot = popen("gnuplot -persistent", "w");
@@ -221,7 +218,7 @@ void plot_comparative_sort_times(int *sizes, double *bubble_times, double *selec
     pclose(gnuplot);
 }
 
-// Función para graficar tres series de tiempos comparativos
+// Función para graficar tres series de tiempos comparativos.
 void plot_comparative_search_times(int sizes[], double seq_times[], double bin_iter_times[], double bin_rec_times[], int count, const char *label, const char *plot_route, const char *plot_title)
 {
     FILE *gnuplot = popen("gnuplot -persistent", "w");
@@ -246,17 +243,17 @@ void plot_comparative_search_times(int sizes[], double seq_times[], double bin_i
                      "'-' using 1:2 with linespoints title 'Binaria Iterativa', "
                      "'-' using 1:2 with linespoints title 'Binaria Recursiva'\n");
 
-    //  Secuencial
+    //  Secuencial.
     for (int i = 0; i < count; i++)
         fprintf(gnuplot, "%d %.9f\n", sizes[i], seq_times[i]);
     fprintf(gnuplot, "e\n");
 
-    //  Binaria Iterativa
+    //  Binaria Iterativa.
     for (int i = 0; i < count; i++)
         fprintf(gnuplot, "%d %.9f\n", sizes[i], bin_iter_times[i]);
     fprintf(gnuplot, "e\n");
 
-    //  Binaria Recursiva
+    //  Binaria Recursiva.
     for (int i = 0; i < count; i++)
         fprintf(gnuplot, "%d %.9f\n", sizes[i], bin_rec_times[i]);
     fprintf(gnuplot, "e\n");
@@ -264,8 +261,9 @@ void plot_comparative_search_times(int sizes[], double seq_times[], double bin_i
     pclose(gnuplot);
 }
 
-// Función auxiliar para formatear números con comas
-void format_with_commas(double number, char *output) {
+// Función auxiliar para formatear números con comas.
+void format_with_commas(double number, char *output)
+{
     char buffer[50];
     sprintf(buffer, "%.2f", number);
 
@@ -282,14 +280,16 @@ void format_with_commas(double number, char *output) {
 
     output[total_len] = '\0';
 
-    // Copiar parte decimal
+    // Copiar parte decimal.
     for (int k = strlen(dot) - 1; k >= 0; k--)
         output[new_len + k] = dot[k];
 
-    while (i >= 0) {
+    while (i >= 0)
+    {
         output[j--] = buffer[i--];
         digit_count++;
-        if (digit_count == 3 && i >= 0) {
+        if (digit_count == 3 && i >= 0)
+        {
             output[j--] = ',';
             digit_count = 0;
         }
